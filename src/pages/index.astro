@@ -14,7 +14,7 @@ const [featured, ...rest] = posts;
 	<section class="hero">
 		<div class="container">
 			<h1>{SITE_TITLE}</h1>
-			<p>{SITE_DESCRIPTION}</p>
+			{SITE_DESCRIPTION && <p>{SITE_DESCRIPTION}</p>}
 		</div>
 	</section>
 
