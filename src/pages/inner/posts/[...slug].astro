@@ -1,0 +1,45 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { INNER_PATH } from '../../../config';
+import { formatDate, slugOf } from '../../../utils';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('posts', ({ id }) => id.startsWith('zh/'));
+	return posts.map((post) => ({
+		params: { slug: slugOf(post.id) },
+		props: { post },
+	}));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const backHref = `/${INNER_PATH}`;
+---
+
+<BaseLayout title={post.data.title} description={post.data.description} lang="zh-CN">
+	<article class="container-narrow">
+		<header class="post-header">
+			<h1>{post.data.title}</h1>
+			<div class="meta">
+				<time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+				{post.data.tags.map((tag) => (
+					<span class="tag">#{tag}</span>
+				))}
+			</div>
+		</header>
+		<div class="post-body">
+			{post.data.cover && (
+				<span class="cover">
+					<img src={post.data.cover} alt={post.data.title} />
+				</span>
+			)}
+			<div class="prose">
+				<Content />
+			</div>
+			<p class="meta">
+				<a href={backHref}>← 返回列表</a>
+			</p>
+		</div>
+	</article>
+</BaseLayout>

@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { INNER_PATH } from '../../config';
+import { formatDate, slugOf } from '../../utils';
+
+const posts = (await getCollection('posts', ({ id }) => id.startsWith('zh/'))).sort(
+	(a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
+);
+---
+
+<BaseLayout lang="zh-CN">
+	<div class="container-narrow">
+		<section class="post-list">
+			{
+				posts.map((post) => (
+					<article class="post-item">
+						<h3>
+							<a href={`/${INNER_PATH}/posts/${slugOf(post.id)}/`}>{post.data.title}</a>
+						</h3>
+						<p class="excerpt">{post.data.description}</p>
+						<div class="meta">
+							<time datetime={post.data.pubDate.toISOString()}>
+								{formatDate(post.data.pubDate)}
+							</time>
+							{post.data.tags.map((tag) => (
+								<span class="tag">#{tag}</span>
+							))}
+						</div>
+					</article>
+				))
+			}
+		</section>
+	</div>
+</BaseLayout>

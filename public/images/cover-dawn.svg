@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480" role="img" aria-label="Abstract gradient cover">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6f92c4"/>
+      <stop offset="0.55" stop-color="#b0a3cc"/>
+      <stop offset="1" stop-color="#f2ac8d"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffe3b3"/>
+      <stop offset="1" stop-color="#ffe3b3" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="480" fill="url(#sky)"/>
+  <circle cx="600" cy="330" r="180" fill="url(#sun)"/>
+  <circle cx="600" cy="330" r="72" fill="#fff0d4"/>
+  <path d="M0 360 L240 300 L420 352 L640 288 L860 356 L1050 312 L1200 350 L1200 480 L0 480 Z" fill="#4a5578"/>
+  <path d="M0 408 L200 372 L430 412 L700 366 L950 414 L1200 384 L1200 480 L0 480 Z" fill="#39415e"/>
+</svg>

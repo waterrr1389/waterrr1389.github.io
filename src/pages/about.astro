@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_TITLE } from '../config';
+---
+
+<BaseLayout title="About" description={`About ${SITE_TITLE}`}>
+	<div class="container-narrow">
+		<header class="page-header">
+			<h1>About</h1>
+			<p>A short introduction to this site and its author</p>
+		</header>
+		<div class="post-body">
+			<div class="prose">
+				<p>
+					Hi, this is {SITE_TITLE} — a personal blog for recording technical exploration
+					and everyday reflections. Most posts come from daily reading, tinkering, and
+					occasional thinking. The style is casual and the schedule is irregular.
+				</p>
+				<p>
+					The site is built with Astro and shipped as plain static files, with no
+					unnecessary decoration. If anything here resonates with you, feel free to
+					subscribe via RSS and say hello someday.
+				</p>
+			</div>
+		</div>
+	</div>
+</BaseLayout>

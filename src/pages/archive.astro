@@ -1,0 +1,44 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { formatDate, slugOf } from '../utils';
+
+const posts = (await getCollection('posts', ({ id }) => id.startsWith('en/'))).sort(
+	(a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
+);
+
+const byYear = new Map<number, typeof posts>();
+for (const post of posts) {
+	const year = post.data.pubDate.getFullYear();
+	const group = byYear.get(year) ?? [];
+	group.push(post);
+	byYear.set(year, group);
+}
+const years = [...byYear.keys()].sort((a, b) => b - a);
+---
+
+<BaseLayout title="Archive" description="All posts grouped by year">
+	<div class="container-narrow">
+		<header class="page-header">
+			<h1>Archive</h1>
+			<p>{posts.length} posts in total</p>
+		</header>
+		<div class="archive-list">
+			{
+				years.map((year) => (
+					<section class="archive-group">
+						<h2>{year}</h2>
+						{byYear.get(year)!.map((post) => (
+							<div class="archive-item">
+								<time datetime={post.data.pubDate.toISOString()}>
+									{formatDate(post.data.pubDate)}
+								</time>
+								<a href={`/posts/${slugOf(post.id)}/`}>{post.data.title}</a>
+							</div>
+						))}
+					</section>
+				))
+			}
+		</div>
+	</div>
+</BaseLayout>

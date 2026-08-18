@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatDate, slugOf } from '../../utils';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('posts', ({ id }) => id.startsWith('en/'));
+	const tags = [...new Set(posts.flatMap((post) => post.data.tags))];
+	return tags.map((tag) => ({
+		params: { tag },
+		props: {
+			tag,
+			posts: posts
+				.filter((post) => post.data.tags.includes(tag))
+				.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()),
+		},
+	}));
+}
+
+const { tag, posts } = Astro.props;
+---
+
+<BaseLayout title={`Tag: ${tag}`} description={`Posts tagged "${tag}"`}>
+	<div class="container-narrow">
+		<header class="page-header">
+			<h1>#{tag}</h1>
+			<p>{posts.length} post{posts.length === 1 ? '' : 's'} · <a href="/tags">All tags</a></p>
+		</header>
+		<section class="post-list">
+			{
+				posts.map((post) => (
+					<article class="post-item">
+						<h3>
+							<a href={`/posts/${slugOf(post.id)}/`}>{post.data.title}</a>
+						</h3>
+						<p class="excerpt">{post.data.description}</p>
+						<div class="meta">
+							<time datetime={post.data.pubDate.toISOString()}>
+								{formatDate(post.data.pubDate)}
+							</time>
+							{post.data.tags.map((t) => (
+								<a class="tag" href={`/tags/${t}/`}>
+									#{t}
+								</a>
+							))}
+						</div>
+					</article>
+				))
+			}
+		</section>
+	</div>
+</BaseLayout>

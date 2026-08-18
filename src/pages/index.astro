@@ -1,0 +1,72 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
+import { formatDate, slugOf } from '../utils';
+
+const posts = (await getCollection('posts', ({ id }) => id.startsWith('en/'))).sort(
+	(a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
+);
+const [featured, ...rest] = posts;
+---
+
+<BaseLayout>
+	<section class="hero">
+		<div class="container">
+			<h1>{SITE_TITLE}</h1>
+			<p>{SITE_DESCRIPTION}</p>
+		</div>
+	</section>
+
+	<div class="container">
+		{
+			featured && (
+				<section class="featured">
+					<span class="label">Latest post</span>
+					<h2>
+						<a href={`/posts/${slugOf(featured.id)}/`}>{featured.data.title}</a>
+					</h2>
+					<p class="summary">{featured.data.description}</p>
+					<div class="meta">
+						<time datetime={featured.data.pubDate.toISOString()}>
+							{formatDate(featured.data.pubDate)}
+						</time>
+						{featured.data.tags.map((tag) => (
+							<a class="tag" href={`/tags/${tag}/`}>
+								#{tag}
+							</a>
+						))}
+					</div>
+					{featured.data.cover && (
+						<a class="cover" href={`/posts/${slugOf(featured.id)}/`}>
+							<img src={featured.data.cover} alt={featured.data.title} loading="lazy" />
+						</a>
+					)}
+				</section>
+			)
+		}
+
+		<section class="post-list">
+			{
+				rest.map((post) => (
+					<article class="post-item">
+						<h3>
+							<a href={`/posts/${slugOf(post.id)}/`}>{post.data.title}</a>
+						</h3>
+						<p class="excerpt">{post.data.description}</p>
+						<div class="meta">
+							<time datetime={post.data.pubDate.toISOString()}>
+								{formatDate(post.data.pubDate)}
+							</time>
+							{post.data.tags.map((tag) => (
+								<a class="tag" href={`/tags/${tag}/`}>
+									#{tag}
+								</a>
+							))}
+						</div>
+					</article>
+				))
+			}
+		</section>
+	</div>
+</BaseLayout>
