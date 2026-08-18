@@ -230,6 +230,15 @@ main {
 	line-height: 1.1;
 }
 
+/* A full sentence as the hero: quieter weight, looser tracking than a bare title */
+.hero h1.tagline {
+	margin: 0;
+	font-size: 40px;
+	font-weight: 600;
+	letter-spacing: -0.01em;
+	line-height: 1.25;
+}
+
 .hero p {
 	margin: 0;
 	font-size: 20px;
@@ -569,6 +578,10 @@ main {
 
 	.hero h1 {
 		font-size: 32px;
+	}
+
+	.hero h1.tagline {
+		font-size: 28px;
 	}
 
 	.site-nav .links {

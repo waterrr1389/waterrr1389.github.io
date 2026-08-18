@@ -13,8 +13,11 @@ const [featured, ...rest] = posts;
 <BaseLayout>
 	<section class="hero">
 		<div class="container">
-			<h1>{SITE_TITLE}</h1>
-			{SITE_DESCRIPTION && <p>{SITE_DESCRIPTION}</p>}
+			{SITE_DESCRIPTION ? (
+				<h1 class="tagline">{SITE_DESCRIPTION}</h1>
+			) : (
+				<h1>{SITE_TITLE}</h1>
+			)}
 		</div>
 	</section>
 
