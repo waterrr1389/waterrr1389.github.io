@@ -11,6 +11,13 @@ const end = new Date(stats.generatedAt);
 end.setHours(0, 0, 0, 0);
 const start = new Date(end);
 start.setDate(start.getDate() - start.getDay() - 52 * 7);
+// Never render before records begin: when the history is shorter than the
+// 52-week window, start from the week containing the first recorded day.
+if (stats.byDay.length) {
+	const dataStart = new Date(`${stats.byDay[0].date}T00:00:00`);
+	dataStart.setDate(dataStart.getDate() - dataStart.getDay());
+	if (dataStart > start) start.setTime(dataStart.getTime());
+}
 
 const cells: { date: string; count: number }[] = [];
 for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
@@ -43,10 +50,7 @@ function level(count: number): number {
 	return Math.min(4, Math.ceil((count / maxDay) * 4));
 }
 
-const dataMin =
-	stats.byDay.length && stats.byDay[0].date < cells[0].date
-		? stats.byDay[0].date
-		: cells[0].date;
+const dataMin = stats.byDay.length ? stats.byDay[0].date : cells[0].date;
 const dataMax = cells[cells.length - 1].date;
 ---
 
