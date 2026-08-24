@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import stats from '../data/mining-stats.json';
+
+const maxDay = Math.max(...stats.byDay.map((d) => d.count));
+---
+
+<BaseLayout title="Mining" description="Japanese immersion mining progress">
+	<div class="container-narrow">
+		<header class="page-header">
+			<h1>Mining progress</h1>
+			<p>
+				{stats.total} cards mined while watching, last active {stats.latestMinedAt}.
+			</p>
+		</header>
+
+		<section>
+			<h2>By show</h2>
+			<ul class="show-list">
+				{
+					stats.byShow.map((s) => (
+						<li>
+							<span class="show-name">{s.show}</span>
+							<span class="show-meta">
+								{s.count} cards · {s.episodes.map((ep) => `EP${ep}`).join(', ')}
+							</span>
+						</li>
+					))
+				}
+			</ul>
+		</section>
+
+		<section>
+			<h2>By day</h2>
+			<ul class="day-list">
+				{
+					stats.byDay.map((d) => (
+						<li>
+							<span class="day-date">{d.date}</span>
+							<span class="day-bar" style={`width: ${(d.count / maxDay) * 100}%`} />
+							<span class="day-count">{d.count}</span>
+						</li>
+					))
+				}
+			</ul>
+		</section>
+	</div>
+</BaseLayout>
+
+<style>
+	.show-list,
+	.day-list {
+		list-style: none;
+		padding: 0;
+	}
+	.show-list li {
+		display: flex;
+		justify-content: space-between;
+		gap: 1em;
+		padding: 0.4em 0;
+	}
+	.show-meta {
+		color: var(--meta, #666);
+	}
+	.day-list li {
+		display: grid;
+		grid-template-columns: 7em 1fr 2em;
+		align-items: center;
+		gap: 0.8em;
+		padding: 0.2em 0;
+	}
+	.day-date {
+		font-variant-numeric: tabular-nums;
+	}
+	.day-bar {
+		display: block;
+		height: 0.7em;
+		background: var(--accent, #4660f1);
+		border-radius: 3px;
+		min-width: 2px;
+	}
+	.day-count {
+		text-align: right;
+	}
+</style>
