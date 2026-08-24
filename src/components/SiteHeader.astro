@@ -46,6 +46,7 @@ import { SITE_TITLE } from '../config';
 	const navMenu = document.getElementById('nav-menu');
 	function setNavOpen(open) {
 		nav?.classList.toggle('nav-open', open);
+		document.body.style.overflow = open ? 'hidden' : '';
 		navToggle?.setAttribute('aria-expanded', String(open));
 		navToggle?.setAttribute('aria-label', open ? '收起导航菜单' : '展开导航菜单');
 	}
