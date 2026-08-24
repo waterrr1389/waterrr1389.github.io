@@ -75,7 +75,7 @@ const dataMax = cells[cells.length - 1].date;
 		<section id="mining-app" data-stats={JSON.stringify(stats.byDay)}>
 			<h2>By day</h2>
 			<div class="heatmap-wrap">
-				<div class="heatmap-months" aria-hidden="true">
+				<div class="heatmap-months" id="heatmap-months" aria-hidden="true">
 					{months.map((m) => <span>{m}</span>)}
 				</div>
 				<div class="heatmap-body">
@@ -88,7 +88,7 @@ const dataMax = cells[cells.length - 1].date;
 						<span>Fri</span>
 						<span />
 					</div>
-					<div class="heatmap" role="img" aria-label={`Daily mining activity heatmap, ${rangeLabel}`}>
+					<div class="heatmap" id="heatmap" role="img" aria-label={`Daily mining activity heatmap, ${rangeLabel}`}>
 						{
 							cells.map((c) => (
 								<span
@@ -136,15 +136,69 @@ const dataMax = cells[cells.length - 1].date;
 	const app = document.getElementById('mining-app');
 	if (app) {
 		const byDay = JSON.parse(app.dataset.stats ?? '[]');
+		const counts = new Map(byDay.map((d) => [d.date, d.count]));
 		const fromInput = document.getElementById('range-from');
 		const toInput = document.getElementById('range-to');
 		const resetButton = document.getElementById('range-reset');
 		const totalEl = document.getElementById('range-total');
 		const showsEl = document.getElementById('range-shows');
 		const daysEl = document.getElementById('range-days');
-		const cells = [...app.querySelectorAll('.heatmap .cell')];
+		const monthsEl = document.getElementById('heatmap-months');
+		const heatmapEl = document.getElementById('heatmap');
 		const defaultFrom = fromInput.value;
 		const defaultTo = toInput.value;
+
+		const toDate = (iso) => new Date(`${iso}T00:00:00`);
+		const toIso = (d) =>
+			`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+		const levelOf = (count, max) =>
+			count === 0 ? 0 : Math.min(4, Math.ceil((count / max) * 4));
+
+		function renderHeatmap(from, to) {
+			// One column per week, rows Sun..Sat, spanning [from, to].
+			const start = toDate(from);
+			start.setDate(start.getDate() - start.getDay());
+			const end = toDate(to);
+
+			const cells = [];
+			for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
+				const iso = toIso(d);
+				cells.push({ date: iso, count: counts.get(iso) ?? 0 });
+			}
+			const max = Math.max(...cells.map((c) => c.count), 1);
+
+			heatmapEl.replaceChildren(
+				...cells.map((c) => {
+					const cell = document.createElement('span');
+					cell.className = `cell lv${levelOf(c.count, max)}`;
+					cell.title = `${c.date} · ${c.count} cards`;
+					return cell;
+				}),
+			);
+
+			// Month labels: one per week column, only where the month changes,
+			// with at least 2 empty columns between labels.
+			const labels = [];
+			let lastLabel = -3;
+			let prevMonth = '';
+			for (let i = 0; i < cells.length; i += 7) {
+				const month = cells[i].date.slice(5, 7);
+				if (month !== prevMonth && i / 7 - lastLabel >= 3) {
+					labels.push(month);
+					lastLabel = i / 7;
+				} else {
+					labels.push('');
+				}
+				prevMonth = month;
+			}
+			monthsEl.replaceChildren(
+				...labels.map((m) => {
+					const span = document.createElement('span');
+					span.textContent = m;
+					return span;
+				}),
+			);
+		}
 
 		function render() {
 			let from = fromInput.value;
@@ -197,10 +251,7 @@ const dataMax = cells[cells.length - 1].date;
 				}),
 			);
 
-			for (const cell of cells) {
-				const date = cell.dataset.date ?? '';
-				cell.classList.toggle('dimmed', date < from || date > to);
-			}
+			renderHeatmap(from, to);
 		}
 
 		fromInput.addEventListener('change', render);
@@ -293,7 +344,6 @@ const dataMax = cells[cells.length - 1].date;
 		height: 9px;
 		border-radius: 2px;
 		background: var(--code-bg);
-		transition: opacity 200ms ease;
 	}
 	.cell.lv1 {
 		background: var(--accent);
@@ -309,15 +359,6 @@ const dataMax = cells[cells.length - 1].date;
 	}
 	.cell.lv4 {
 		background: var(--accent);
-	}
-	.cell.dimmed {
-		opacity: 0.12;
-	}
-	.cell.dimmed.lv1,
-	.cell.dimmed.lv2,
-	.cell.dimmed.lv3,
-	.cell.dimmed.lv4 {
-		background: var(--code-bg);
 	}
 	.heatmap-legend {
 		display: flex;
