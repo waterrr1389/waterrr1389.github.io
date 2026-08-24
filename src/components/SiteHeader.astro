@@ -6,11 +6,13 @@ import { SITE_TITLE } from '../config';
 	<div class="site-nav-inner">
 		<a class="brand" href="/">{SITE_TITLE}</a>
 		<nav class="links" aria-label="Main navigation">
-			<a href="/">Posts</a>
-			<a href="/archive">Archive</a>
-			<a href="/tags">Tags</a>
-			<a href="/mining">Mining</a>
-			<a href="/about">About</a>
+			<div class="nav-menu" id="nav-menu">
+				<a href="/">Posts</a>
+				<a href="/archive">Archive</a>
+				<a href="/tags">Tags</a>
+				<a href="/mining">Mining</a>
+				<a href="/about">About</a>
+			</div>
 			<button class="theme-toggle" id="theme-toggle" aria-label="切换暗色模式">
 				<svg class="icon-moon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
 					<path d="M13.5 9.6A5.8 5.8 0 0 1 6.4 2.5a5.8 5.8 0 1 0 7.1 7.1Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
@@ -18,6 +20,12 @@ import { SITE_TITLE } from '../config';
 				<svg class="icon-sun" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
 					<circle cx="8" cy="8" r="3.2" stroke="currentColor" stroke-width="1.4"/>
 					<path d="M8 1.2v1.6M8 13.2v1.6M1.2 8h1.6M13.2 8h1.6M3.2 3.2l1.1 1.1M11.7 11.7l1.1 1.1M12.8 3.2l-1.1 1.1M4.3 11.7l-1.1 1.1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+				</svg>
+			</button>
+			<button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="展开导航菜单">
+				<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+					<path class="nav-line nav-line-top" d="M2.5 5.5h11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+					<path class="nav-line nav-line-bottom" d="M2.5 10.5h11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
 				</svg>
 			</button>
 		</nav>
@@ -31,5 +39,23 @@ import { SITE_TITLE } from '../config';
 		const next = current === 'dark' ? 'light' : 'dark';
 		document.documentElement.setAttribute('data-theme', next);
 		localStorage.setItem('theme', next);
+	});
+
+	const nav = document.querySelector('.site-nav');
+	const navToggle = document.getElementById('nav-toggle');
+	const navMenu = document.getElementById('nav-menu');
+	function setNavOpen(open) {
+		nav?.classList.toggle('nav-open', open);
+		navToggle?.setAttribute('aria-expanded', String(open));
+		navToggle?.setAttribute('aria-label', open ? '收起导航菜单' : '展开导航菜单');
+	}
+	navToggle?.addEventListener('click', () => {
+		setNavOpen(!nav?.classList.contains('nav-open'));
+	});
+	navMenu?.addEventListener('click', (event) => {
+		if (event.target instanceof HTMLAnchorElement) setNavOpen(false);
+	});
+	document.addEventListener('keydown', (event) => {
+		if (event.key === 'Escape') setNavOpen(false);
 	});
 </script>
