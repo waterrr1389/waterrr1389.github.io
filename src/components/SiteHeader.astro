@@ -47,6 +47,7 @@ import { SITE_TITLE } from '../config';
 	function setNavOpen(open) {
 		nav?.classList.toggle('nav-open', open);
 		document.body.style.overflow = open ? 'hidden' : '';
+		document.querySelector('main')?.toggleAttribute('inert', open);
 		navToggle?.setAttribute('aria-expanded', String(open));
 		navToggle?.setAttribute('aria-label', open ? '收起导航菜单' : '展开导航菜单');
 	}
@@ -58,6 +59,10 @@ import { SITE_TITLE } from '../config';
 	});
 	document.addEventListener('keydown', (event) => {
 		if (event.key === 'Escape') setNavOpen(false);
+	});
+	// The menu only exists <=640px; close it if the viewport grows wider.
+	window.matchMedia('(min-width: 641px)').addEventListener('change', (event) => {
+		if (event.matches) setNavOpen(false);
 	});
 
 	function syncNavScrolled() {

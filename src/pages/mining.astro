@@ -43,7 +43,10 @@ function level(count: number): number {
 	return Math.min(4, Math.ceil((count / maxDay) * 4));
 }
 
-const dataMin = cells[0].date;
+const dataMin =
+	stats.byDay.length && stats.byDay[0].date < cells[0].date
+		? stats.byDay[0].date
+		: cells[0].date;
 const dataMax = cells[cells.length - 1].date;
 ---
 
@@ -201,8 +204,8 @@ const dataMax = cells[cells.length - 1].date;
 		}
 
 		function render() {
-			let from = fromInput.value;
-			let to = toInput.value;
+			let from = fromInput.value || defaultFrom;
+			let to = toInput.value || defaultTo;
 			if (from > to) [from, to] = [to, from];
 
 			const days = byDay.filter((d) => d.date >= from && d.date <= to);
@@ -266,8 +269,9 @@ const dataMax = cells[cells.length - 1].date;
 </script>
 
 <style is:global>
-	.show-list,
-	.day-list {
+	/* .show-list is shared with the "By show" section; everything else is
+	   scoped under #mining-app to avoid leaking generic class names. */
+	.show-list {
 		list-style: none;
 		padding: 0;
 	}
@@ -280,30 +284,34 @@ const dataMax = cells[cells.length - 1].date;
 	.show-meta {
 		color: var(--text-secondary);
 	}
-	.day-list li {
+	#mining-app .day-list {
+		list-style: none;
+		padding: 0;
+	}
+	#mining-app .day-list li {
 		display: grid;
 		grid-template-columns: 7em 1fr 2em;
 		align-items: center;
 		gap: 0.8em;
 		padding: 0.2em 0;
 	}
-	.day-date {
+	#mining-app .day-date {
 		font-variant-numeric: tabular-nums;
 	}
-	.day-bar {
+	#mining-app .day-bar {
 		display: block;
 		height: 0.7em;
 		background: var(--accent);
 		border-radius: 3px;
 		min-width: 2px;
 	}
-	.day-count {
+	#mining-app .day-count {
 		text-align: right;
 	}
-	.heatmap-wrap {
+	#mining-app .heatmap-wrap {
 		overflow-x: auto;
 	}
-	.heatmap-months {
+	#mining-app .heatmap-months {
 		display: grid;
 		grid-auto-flow: column;
 		grid-auto-columns: 11px;
@@ -315,16 +323,16 @@ const dataMax = cells[cells.length - 1].date;
 		font-variant-numeric: tabular-nums;
 		width: max-content;
 	}
-	.heatmap-months span {
+	#mining-app .heatmap-months span {
 		white-space: nowrap;
 		overflow: visible;
 	}
-	.heatmap-body {
+	#mining-app .heatmap-body {
 		display: flex;
 		gap: 4px;
 		width: max-content;
 	}
-	.heatmap-days {
+	#mining-app .heatmap-days {
 		display: grid;
 		grid-template-rows: repeat(7, 11px);
 		font-size: 10px;
@@ -332,35 +340,35 @@ const dataMax = cells[cells.length - 1].date;
 		color: var(--text-secondary);
 		width: 26px;
 	}
-	.heatmap {
+	#mining-app .heatmap {
 		display: grid;
 		grid-template-rows: repeat(7, 1fr);
 		grid-auto-flow: column;
 		gap: 2px;
 		width: max-content;
 	}
-	.cell {
+	#mining-app .cell {
 		width: 9px;
 		height: 9px;
 		border-radius: 2px;
 		background: var(--code-bg);
 	}
-	.cell.lv1 {
+	#mining-app .cell.lv1 {
 		background: var(--accent);
 		opacity: 0.3;
 	}
-	.cell.lv2 {
+	#mining-app .cell.lv2 {
 		background: var(--accent);
 		opacity: 0.55;
 	}
-	.cell.lv3 {
+	#mining-app .cell.lv3 {
 		background: var(--accent);
 		opacity: 0.8;
 	}
-	.cell.lv4 {
+	#mining-app .cell.lv4 {
 		background: var(--accent);
 	}
-	.heatmap-legend {
+	#mining-app .heatmap-legend {
 		display: flex;
 		align-items: center;
 		gap: 3px;
@@ -368,11 +376,11 @@ const dataMax = cells[cells.length - 1].date;
 		font-size: 12px;
 		color: var(--text-secondary);
 	}
-	.heatmap-legend span:first-child,
-	.heatmap-legend span:last-child {
+	#mining-app .heatmap-legend span:first-child,
+	#mining-app .heatmap-legend span:last-child {
 		margin: 0 4px;
 	}
-	.range-picker {
+	#mining-app .range-picker {
 		display: flex;
 		align-items: center;
 		gap: 12px;
@@ -381,12 +389,12 @@ const dataMax = cells[cells.length - 1].date;
 		font-size: 14px;
 		color: var(--text-secondary);
 	}
-	.range-picker label {
+	#mining-app .range-picker label {
 		display: flex;
 		align-items: center;
 		gap: 6px;
 	}
-	.range-picker input[type='date'] {
+	#mining-app .range-picker input[type='date'] {
 		font: inherit;
 		color: var(--text);
 		background: var(--code-bg);
@@ -394,7 +402,7 @@ const dataMax = cells[cells.length - 1].date;
 		border-radius: 6px;
 		padding: 4px 8px;
 	}
-	.range-picker button {
+	#mining-app .range-picker button {
 		font: inherit;
 		color: var(--text-secondary);
 		background: transparent;
@@ -406,11 +414,11 @@ const dataMax = cells[cells.length - 1].date;
 			color 200ms ease,
 			border-color 200ms ease;
 	}
-	.range-picker button:hover {
+	#mining-app .range-picker button:hover {
 		color: var(--text);
 		border-color: var(--text-secondary);
 	}
-	.range-total {
+	#mining-app .range-total {
 		margin-top: 1em;
 	}
 </style>
