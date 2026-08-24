@@ -2,7 +2,28 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import stats from '../data/mining-stats.json';
 
-const maxDay = Math.max(...stats.byDay.map((d) => d.count));
+const counts = new Map(stats.byDay.map((d) => [d.date, d.count]));
+const maxDay = Math.max(...stats.byDay.map((d) => d.count), 1);
+
+// GitHub-style calendar heatmap: one column per week, rows are Sun..Sat,
+// ending at the day the stats were generated.
+const end = new Date(stats.generatedAt);
+end.setHours(0, 0, 0, 0);
+const start = new Date(end);
+start.setDate(start.getDate() - start.getDay() - 52 * 7 + 1);
+
+const cells: { date: string; count: number }[] = [];
+for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
+	const iso = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(
+		d.getDate(),
+	).padStart(2, '0')}`;
+	cells.push({ date: iso, count: counts.get(iso) ?? 0 });
+}
+
+function level(count: number): number {
+	if (count === 0) return 0;
+	return Math.min(4, Math.ceil((count / maxDay) * 4));
+}
 ---
 
 <BaseLayout title="Mining" description="Japanese immersion mining progress">
@@ -32,24 +53,33 @@ const maxDay = Math.max(...stats.byDay.map((d) => d.count));
 
 		<section>
 			<h2>By day</h2>
-			<ul class="day-list">
-				{
-					stats.byDay.map((d) => (
-						<li>
-							<span class="day-date">{d.date}</span>
-							<span class="day-bar" style={`width: ${(d.count / maxDay) * 100}%`} />
-							<span class="day-count">{d.count}</span>
-						</li>
-					))
-				}
-			</ul>
+			<div class="heatmap-wrap">
+				<div class="heatmap" role="img" aria-label="Daily mining activity heatmap">
+					{
+						cells.map((c) => (
+							<span
+								class={`cell lv${level(c.count)}`}
+								title={`${c.date} · ${c.count} cards`}
+							/>
+						))
+					}
+				</div>
+			</div>
+			<div class="heatmap-legend">
+				<span>Less</span>
+				<span class="cell lv0" />
+				<span class="cell lv1" />
+				<span class="cell lv2" />
+				<span class="cell lv3" />
+				<span class="cell lv4" />
+				<span>More</span>
+			</div>
 		</section>
 	</div>
 </BaseLayout>
 
 <style>
-	.show-list,
-	.day-list {
+	.show-list {
 		list-style: none;
 		padding: 0;
 	}
@@ -60,26 +90,49 @@ const maxDay = Math.max(...stats.byDay.map((d) => d.count));
 		padding: 0.4em 0;
 	}
 	.show-meta {
-		color: var(--meta, #666);
+		color: var(--text-secondary);
 	}
-	.day-list li {
+	.heatmap-wrap {
+		overflow-x: auto;
+	}
+	.heatmap {
 		display: grid;
-		grid-template-columns: 7em 1fr 2em;
+		grid-template-rows: repeat(7, 1fr);
+		grid-auto-flow: column;
+		gap: 2px;
+		width: max-content;
+	}
+	.cell {
+		width: 10px;
+		height: 10px;
+		border-radius: 2px;
+		background: var(--code-bg);
+	}
+	.cell.lv1 {
+		background: var(--accent);
+		opacity: 0.3;
+	}
+	.cell.lv2 {
+		background: var(--accent);
+		opacity: 0.55;
+	}
+	.cell.lv3 {
+		background: var(--accent);
+		opacity: 0.8;
+	}
+	.cell.lv4 {
+		background: var(--accent);
+	}
+	.heatmap-legend {
+		display: flex;
 		align-items: center;
-		gap: 0.8em;
-		padding: 0.2em 0;
+		gap: 3px;
+		margin-top: 0.6em;
+		font-size: 12px;
+		color: var(--text-secondary);
 	}
-	.day-date {
-		font-variant-numeric: tabular-nums;
-	}
-	.day-bar {
-		display: block;
-		height: 0.7em;
-		background: var(--accent, #4660f1);
-		border-radius: 3px;
-		min-width: 2px;
-	}
-	.day-count {
-		text-align: right;
+	.heatmap-legend span:first-child,
+	.heatmap-legend span:last-child {
+		margin: 0 4px;
 	}
 </style>
