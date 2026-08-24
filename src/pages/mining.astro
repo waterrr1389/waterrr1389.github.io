@@ -42,6 +42,9 @@ function level(count: number): number {
 	if (count === 0) return 0;
 	return Math.min(4, Math.ceil((count / maxDay) * 4));
 }
+
+const dataMin = cells[0].date;
+const dataMax = cells[cells.length - 1].date;
 ---
 
 <BaseLayout title="Mining" description="Japanese immersion mining progress">
@@ -69,7 +72,7 @@ function level(count: number): number {
 			</ul>
 		</section>
 
-		<section>
+		<section id="mining-app" data-stats={JSON.stringify(stats.byDay)}>
 			<h2>By day</h2>
 			<div class="heatmap-wrap">
 				<div class="heatmap-months" aria-hidden="true">
@@ -90,6 +93,7 @@ function level(count: number): number {
 							cells.map((c) => (
 								<span
 									class={`cell lv${level(c.count)}`}
+									data-date={c.date}
 									title={`${c.date} · ${c.count} cards`}
 								/>
 							))
@@ -106,12 +110,113 @@ function level(count: number): number {
 				<span class="cell lv4" />
 				<span>More</span>
 			</div>
+
+			<div class="range-picker">
+				<label>
+					From
+					<input type="date" id="range-from" min={dataMin} max={dataMax} value={dataMin} />
+				</label>
+				<label>
+					To
+					<input type="date" id="range-to" min={dataMin} max={dataMax} value={dataMax} />
+				</label>
+				<button id="range-reset" type="button">Reset</button>
+			</div>
+
+			<div class="range-result" aria-live="polite">
+				<p class="range-total"><strong id="range-total" /></p>
+				<ul class="show-list" id="range-shows" />
+				<ul class="day-list" id="range-days" />
+			</div>
 		</section>
 	</div>
 </BaseLayout>
 
-<style>
-	.show-list {
+<script>
+	const app = document.getElementById('mining-app');
+	if (app) {
+		const byDay = JSON.parse(app.dataset.stats ?? '[]');
+		const fromInput = document.getElementById('range-from');
+		const toInput = document.getElementById('range-to');
+		const resetButton = document.getElementById('range-reset');
+		const totalEl = document.getElementById('range-total');
+		const showsEl = document.getElementById('range-shows');
+		const daysEl = document.getElementById('range-days');
+		const cells = [...app.querySelectorAll('.heatmap .cell')];
+		const defaultFrom = fromInput.value;
+		const defaultTo = toInput.value;
+
+		function render() {
+			let from = fromInput.value;
+			let to = toInput.value;
+			if (from > to) [from, to] = [to, from];
+
+			const days = byDay.filter((d) => d.date >= from && d.date <= to);
+			const total = days.reduce((sum, d) => sum + d.count, 0);
+			const shows = {};
+			for (const d of days) {
+				for (const [show, count] of Object.entries(d.shows ?? {})) {
+					shows[show] = (shows[show] ?? 0) + count;
+				}
+			}
+			const maxCount = Math.max(...days.map((d) => d.count), 1);
+
+			totalEl.textContent = total > 0
+				? `${total} cards between ${from} and ${to}`
+				: `No cards between ${from} and ${to}`;
+
+			showsEl.replaceChildren(
+				...Object.entries(shows)
+					.sort((a, b) => b[1] - a[1])
+					.map(([show, count]) => {
+						const li = document.createElement('li');
+						const name = document.createElement('span');
+						name.textContent = show;
+						const meta = document.createElement('span');
+						meta.className = 'show-meta';
+						meta.textContent = `${count} cards`;
+						li.append(name, meta);
+						return li;
+					}),
+			);
+
+			daysEl.replaceChildren(
+				...days.map((d) => {
+					const li = document.createElement('li');
+					const date = document.createElement('span');
+					date.className = 'day-date';
+					date.textContent = d.date;
+					const bar = document.createElement('span');
+					bar.className = 'day-bar';
+					bar.style.width = `${(d.count / maxCount) * 100}%`;
+					const count = document.createElement('span');
+					count.className = 'day-count';
+					count.textContent = String(d.count);
+					li.append(date, bar, count);
+					return li;
+				}),
+			);
+
+			for (const cell of cells) {
+				const date = cell.dataset.date ?? '';
+				cell.classList.toggle('dimmed', date < from || date > to);
+			}
+		}
+
+		fromInput.addEventListener('change', render);
+		toInput.addEventListener('change', render);
+		resetButton.addEventListener('click', () => {
+			fromInput.value = defaultFrom;
+			toInput.value = defaultTo;
+			render();
+		});
+		render();
+	}
+</script>
+
+<style is:global>
+	.show-list,
+	.day-list {
 		list-style: none;
 		padding: 0;
 	}
@@ -123,6 +228,26 @@ function level(count: number): number {
 	}
 	.show-meta {
 		color: var(--text-secondary);
+	}
+	.day-list li {
+		display: grid;
+		grid-template-columns: 7em 1fr 2em;
+		align-items: center;
+		gap: 0.8em;
+		padding: 0.2em 0;
+	}
+	.day-date {
+		font-variant-numeric: tabular-nums;
+	}
+	.day-bar {
+		display: block;
+		height: 0.7em;
+		background: var(--accent);
+		border-radius: 3px;
+		min-width: 2px;
+	}
+	.day-count {
+		text-align: right;
 	}
 	.heatmap-wrap {
 		overflow-x: auto;
@@ -168,6 +293,7 @@ function level(count: number): number {
 		height: 9px;
 		border-radius: 2px;
 		background: var(--code-bg);
+		transition: opacity 200ms ease;
 	}
 	.cell.lv1 {
 		background: var(--accent);
@@ -184,6 +310,15 @@ function level(count: number): number {
 	.cell.lv4 {
 		background: var(--accent);
 	}
+	.cell.dimmed {
+		opacity: 0.12;
+	}
+	.cell.dimmed.lv1,
+	.cell.dimmed.lv2,
+	.cell.dimmed.lv3,
+	.cell.dimmed.lv4 {
+		background: var(--code-bg);
+	}
 	.heatmap-legend {
 		display: flex;
 		align-items: center;
@@ -195,5 +330,46 @@ function level(count: number): number {
 	.heatmap-legend span:first-child,
 	.heatmap-legend span:last-child {
 		margin: 0 4px;
+	}
+	.range-picker {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		flex-wrap: wrap;
+		margin-top: 1.5em;
+		font-size: 14px;
+		color: var(--text-secondary);
+	}
+	.range-picker label {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+	}
+	.range-picker input[type='date'] {
+		font: inherit;
+		color: var(--text);
+		background: var(--code-bg);
+		border: 1px solid var(--border);
+		border-radius: 6px;
+		padding: 4px 8px;
+	}
+	.range-picker button {
+		font: inherit;
+		color: var(--text-secondary);
+		background: transparent;
+		border: 1px solid var(--border);
+		border-radius: 6px;
+		padding: 4px 12px;
+		cursor: pointer;
+		transition:
+			color 200ms ease,
+			border-color 200ms ease;
+	}
+	.range-picker button:hover {
+		color: var(--text);
+		border-color: var(--text-secondary);
+	}
+	.range-total {
+		margin-top: 1em;
 	}
 </style>

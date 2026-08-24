@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-24T01:11:50+00:00",
+  "generatedAt": "2026-08-24T02:15:06+00:00",
   "total": 17,
   "byShow": [
     {
@@ -13,7 +13,10 @@
   "byDay": [
     {
       "date": "2026-07-06",
-      "count": 17
+      "count": 17,
+      "shows": {
+        "Karakai Jouzu no Takagi-san": 17
+      }
     }
   ],
   "latestMinedAt": "2026-07-06"
