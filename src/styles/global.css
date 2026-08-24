@@ -662,8 +662,8 @@ main {
 		display: flex;
 		flex-direction: column;
 		align-items: stretch;
-		gap: 4px;
-		padding: 32px 24px;
+		gap: 2px;
+		padding: 24px 22px;
 		background: var(--nav-menu-bg);
 		-webkit-backdrop-filter: saturate(180%) blur(20px);
 		backdrop-filter: saturate(180%) blur(20px);
@@ -675,10 +675,11 @@ main {
 	}
 
 	.site-nav .nav-menu a {
-		font-size: 20px;
-		font-weight: 500;
+		font-size: 24px;
+		font-weight: 600;
+		letter-spacing: -0.01em;
 		height: auto;
-		padding: 12px 0;
+		padding: 10px 0;
 		border-radius: 0;
 		color: var(--text);
 		opacity: 0;
