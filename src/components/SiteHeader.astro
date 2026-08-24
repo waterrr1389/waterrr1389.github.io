@@ -58,4 +58,10 @@ import { SITE_TITLE } from '../config';
 	document.addEventListener('keydown', (event) => {
 		if (event.key === 'Escape') setNavOpen(false);
 	});
+
+	function syncNavScrolled() {
+		nav?.classList.toggle('scrolled', window.scrollY > 0);
+	}
+	window.addEventListener('scroll', syncNavScrolled, { passive: true });
+	syncNavScrolled();
 </script>
