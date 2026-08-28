@@ -33,11 +33,22 @@ AnkiConnect exposes an HTTP JSON API at `http://127.0.0.1:8765` (API v6).
   maintenance (e.g. clearing meaningless `MiscInfo` values), not part of the
   blog pipeline. AnkiWeb sync (`sync`) is also separate from the blog chain.
 - `~/aaa/sync_mining_to_blog.py` (standalone, calls the API via urllib):
+  - Starts with an AnkiWeb `sync` so phone-side reviews reach the local
+    collection before stats are read.
   - Query: `deck:"JP::JP-N2_3::Lapis" "MiscInfo:_*"`.
   - `MISC_RE = ^(?P<show>.+?)\s+EP(?P<ep>\d+)\s+\(` selects mpvacious cards.
     This regex is coupled to `miscinfo_format` — change both together.
-  - Aggregates: total; per show (count, episode set); per day (note id is the
-    creation time in epoch ms) with a per-day show breakdown; latest mining day.
+  - Learned counts: a note is learned once any of its cards has `reps > 0`
+    (via `cardsInfo`), aggregated globally and per show.
+  - Study minutes: total `revlog.time` across the Japanese decks
+    (`STUDY_DECK_ROOTS = ("JP", "おにぎり文法")`). AnkiConnect does not expose
+    review durations, so the script reads a copy of `collection.anki2`
+    (plus WAL sidecars when present) with sqlite; a compatible `unicase`
+    collation is registered because the `decks` table declares Anki's custom
+    one. On failure the previous JSON's `studyMinutes` is kept.
+  - Aggregates: total; learned; per show (count, learned, episode set); per
+    day (note id is the creation time in epoch ms) with a per-day show
+    breakdown; latest mining day.
   - Compares ignoring `generatedAt`; exits quietly when unchanged.
   - Refuses to push when the blog repo has unrelated pending changes.
     Whitelist: the stats file itself and `AGENTS.md`. The commit is scoped
@@ -50,8 +61,9 @@ AnkiConnect exposes an HTTP JSON API at `http://127.0.0.1:8765` (API v6).
 - Data is embedded at build time (JSON import, plus a `data-stats` attribute
   for the client script). The heatmap is server-rendered, so the page works
   without JS; the range-picker results are client-only.
-- Sections: header summary (total + last active day), "By show" list,
-  "By day" heatmap.
+- Sections: header summary (stat row: review hours, learned/total, active
+  days — plus total + last active day and a methodology note), "By show"
+  list with learned/total progress gradient, "By day" heatmap.
 - Heatmap: GitHub-style, one column per week (Sunday-aligned), rows Sun–Sat;
   window is 52 weeks clamped to the week containing the first recorded day;
   month labels only where the month changes (≥ 2 empty columns between
@@ -66,8 +78,10 @@ AnkiConnect exposes an HTTP JSON API at `http://127.0.0.1:8765` (API v6).
   JS-created elements; all page selectors are prefixed with `#mining-app`
   (`.show-list` is shared with the SSR section).
 
-`mining-stats.json` shape: `{ generatedAt, total, latestMinedAt, byShow:
-[{show, count, episodes}], byDay: [{date, count, shows: {show: count}}] }`.
+`mining-stats.json` shape: `{ generatedAt, total, learned, studyMinutes,
+latestMinedAt, byShow: [{show, count, learned, episodes}], byDay: [{date,
+count, shows: {show: count}}] }`. `learned`/`studyMinutes` may be absent in
+older files; the page tolerates that.
 
 ## 4. Update and deploy flow
 

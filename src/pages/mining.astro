@@ -52,14 +52,46 @@ function level(count: number): number {
 
 const dataMin = stats.byDay.length ? stats.byDay[0].date : cells[0].date;
 const dataMax = cells[cells.length - 1].date;
+
+const studyHours =
+	stats.studyMinutes != null ? (stats.studyMinutes / 60).toFixed(1) : null;
+const learnedPct =
+	stats.learned != null && stats.total > 0
+		? Math.round((stats.learned / stats.total) * 100)
+		: null;
 ---
 
 <BaseLayout title="Mining" description="Japanese immersion mining progress">
 	<div class="container-narrow">
 		<header class="page-header">
 			<h1>Mining progress</h1>
+			<ul class="stat-row">
+				{
+					studyHours && (
+						<li>
+							<strong>{studyHours}</strong> hours reviewing
+						</li>
+					)
+				}
+				{
+					stats.learned != null && (
+						<li>
+							<strong>{stats.learned}</strong> / {stats.total} learned
+							{learnedPct != null && ` (${learnedPct}%)`}
+						</li>
+					)
+				}
+				<li>
+					<strong>{stats.byDay.length}</strong> active days
+				</li>
+			</ul>
 			<p>
 				{stats.total} cards mined while watching, last active {stats.latestMinedAt}.
+			</p>
+			<p class="stat-note">
+				Review time counts Anki reviews in the JP and おにぎり文法 decks.
+				Only time-to-answer is recorded, so actual time spent is higher; a
+				card counts as learned once reviewed at least once.
 			</p>
 		</header>
 
@@ -67,14 +99,22 @@ const dataMax = cells[cells.length - 1].date;
 			<h2>By show</h2>
 			<ul class="show-list">
 				{
-					stats.byShow.map((s) => (
-						<li>
-							<span class="show-name">{s.show}</span>
-							<span class="show-meta">
-								{s.count} cards · {s.episodes.map((ep) => `EP${ep}`).join(', ')}
-							</span>
-						</li>
-					))
+					stats.byShow.map((s) => {
+						const learned = s.learned ?? 0;
+						const pct = s.count > 0 ? Math.round((learned / s.count) * 1000) / 10 : 0;
+						return (
+							<li
+								class="show-progress"
+								style={`background: linear-gradient(to right, color-mix(in srgb, var(--accent) 12%, transparent) ${pct}%, transparent ${pct}%)`}
+							>
+								<span class="show-name">{s.show}</span>
+								<span class="show-meta">
+									{learned}/{s.count} learned ·{' '}
+									{s.episodes.map((ep) => `EP${ep}`).join(', ')}
+								</span>
+							</li>
+						);
+					})
 				}
 			</ul>
 		</section>
@@ -284,6 +324,25 @@ const dataMax = cells[cells.length - 1].date;
 		justify-content: space-between;
 		gap: 1em;
 		padding: 0.4em 0;
+	}
+	.show-list li.show-progress {
+		padding: 0.4em 0.5em;
+		margin: 0 -0.5em;
+		border-radius: 4px;
+	}
+	.stat-row {
+		list-style: none;
+		padding: 0;
+		display: flex;
+		gap: 2em;
+		flex-wrap: wrap;
+	}
+	.stat-row strong {
+		font-size: 1.4em;
+	}
+	.stat-note {
+		font-size: 13px;
+		color: var(--text-secondary);
 	}
 	.show-meta {
 		color: var(--text-secondary);
