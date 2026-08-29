@@ -9,6 +9,13 @@ const maxDay = Math.max(...stats.byDay.map((d) => d.count), 1);
 // ending at the day the stats were generated.
 const end = new Date(stats.generatedAt);
 end.setHours(0, 0, 0, 0);
+// byDay dates are the author's local calendar days, while generatedAt is UTC:
+// when mining happens after local midnight, generatedAt's UTC date can lag a
+// day behind the latest byDay entry. Never end the window before the data.
+if (stats.byDay.length) {
+	const lastDay = new Date(`${stats.byDay[stats.byDay.length - 1].date}T00:00:00`);
+	if (lastDay > end) end.setTime(lastDay.getTime());
+}
 const start = new Date(end);
 start.setDate(start.getDate() - start.getDay() - 52 * 7);
 // Never render before records begin: when the history is shorter than the
