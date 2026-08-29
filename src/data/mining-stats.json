@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-29T17:04:45+00:00",
-  "total": 43,
+  "generatedAt": "2026-08-29T18:38:41+00:00",
+  "total": 45,
   "learned": 16,
   "byShow": [
     {
@@ -10,6 +10,14 @@
       "episodes": [
         6,
         7
+      ]
+    },
+    {
+      "show": "Sono Bisque Doll wa Koi wo Suru",
+      "count": 2,
+      "learned": 0,
+      "episodes": [
+        1
       ]
     }
   ],
@@ -30,9 +38,10 @@
     },
     {
       "date": "2026-08-30",
-      "count": 4,
+      "count": 6,
       "shows": {
-        "Karakai Jouzu no Takagi-san": 4
+        "Karakai Jouzu no Takagi-san": 4,
+        "Sono Bisque Doll wa Koi wo Suru": 2
       }
     }
   ],
