@@ -24,15 +24,15 @@ Yomitan: browser-side mining also uses the Lapis model, but its `MiscInfo`
 gets `{document-title}`, which does not match the mpvacious format — those
 cards are automatically excluded from the stats.
 
-## 2. Reading Anki — AnkiConnect and the `~/aaa` scripts
+## 2. Reading Anki — AnkiConnect and the `~/anki` scripts
 
 AnkiConnect exposes an HTTP JSON API at `http://127.0.0.1:8765` (API v6).
 
-- `~/aaa/anki_connect_cli.py` (+ shared `anki_cli_shared.py`, stdlib only):
+- `~/anki/anki_connect_cli.py` (+ shared `anki_cli_shared.py`, stdlib only):
   wraps ping / find-notes / notes-info / update-note / sync. Used for Anki
   maintenance (e.g. clearing meaningless `MiscInfo` values), not part of the
   blog pipeline. AnkiWeb sync (`sync`) is also separate from the blog chain.
-- `~/aaa/sync_mining_to_blog.py` (standalone, calls the API via urllib):
+- `~/anki/sync_mining_to_blog.py` (standalone, calls the API via urllib):
   - Starts with an AnkiWeb `sync` so phone-side reviews reach the local
     collection before stats are read.
   - Query: `deck:"JP::JP-N2_3::Lapis" "MiscInfo:_*"`.
@@ -54,7 +54,7 @@ AnkiConnect exposes an HTTP JSON API at `http://127.0.0.1:8765` (API v6).
     Whitelist: the stats file itself and `AGENTS.md`. The commit is scoped
     with `git commit -- <path>` so staged whitelisted edits are not swept in.
   - Suggested crontab entry (NOT installed — `crontab -l` is empty):
-    `17 */6 * * * cd /home/frisk/aaa && /usr/bin/python3 sync_mining_to_blog.py >> /home/frisk/aaa/logs/mining-sync.log 2>&1`
+    `17 */6 * * * cd /home/frisk/anki && /usr/bin/python3 sync_mining_to_blog.py >> /home/frisk/anki/logs/mining-sync.log 2>&1`
 
 ## 3. Display — `src/pages/mining.astro`
 
