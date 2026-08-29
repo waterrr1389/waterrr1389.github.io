@@ -1,14 +1,15 @@
 {
-  "generatedAt": "2026-08-29T12:39:53+00:00",
-  "total": 28,
+  "generatedAt": "2026-08-29T17:04:45+00:00",
+  "total": 43,
   "learned": 16,
   "byShow": [
     {
       "show": "Karakai Jouzu no Takagi-san",
-      "count": 28,
+      "count": 43,
       "learned": 16,
       "episodes": [
-        6
+        6,
+        7
       ]
     }
   ],
@@ -22,12 +23,19 @@
     },
     {
       "date": "2026-08-29",
-      "count": 11,
+      "count": 22,
       "shows": {
-        "Karakai Jouzu no Takagi-san": 11
+        "Karakai Jouzu no Takagi-san": 22
+      }
+    },
+    {
+      "date": "2026-08-30",
+      "count": 4,
+      "shows": {
+        "Karakai Jouzu no Takagi-san": 4
       }
     }
   ],
-  "latestMinedAt": "2026-08-29",
+  "latestMinedAt": "2026-08-30",
   "studyMinutes": 5355
 }
