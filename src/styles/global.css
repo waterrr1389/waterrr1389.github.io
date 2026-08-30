@@ -535,6 +535,49 @@ main {
 	color: var(--text-secondary);
 }
 
+/* ===== SLA / mining stats ===== */
+.stat-row {
+	list-style: none;
+	padding: 0;
+	display: flex;
+	gap: 2em;
+	flex-wrap: wrap;
+}
+
+.stat-row strong {
+	font-size: 1.4em;
+}
+
+.stat-note {
+	font-size: 13px;
+	color: var(--text-secondary);
+}
+
+.show-list {
+	list-style: none;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 0.3em;
+}
+
+.show-list li {
+	display: flex;
+	justify-content: space-between;
+	gap: 1em;
+	padding: 0.4em 0;
+}
+
+.show-list li.show-progress {
+	padding: 0.4em 0.5em;
+	margin: 0 -0.5em;
+	border-radius: 4px;
+}
+
+.show-meta {
+	color: var(--text-secondary);
+}
+
 .tag-cloud {
 	padding: 48px 0 80px;
 	display: flex;
