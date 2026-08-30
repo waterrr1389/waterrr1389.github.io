@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-29T18:38:41+00:00",
-  "total": 45,
+  "generatedAt": "2026-08-30T16:30:43+00:00",
+  "total": 51,
   "learned": 16,
   "byShow": [
     {
@@ -14,7 +14,7 @@
     },
     {
       "show": "Sono Bisque Doll wa Koi wo Suru",
-      "count": 2,
+      "count": 8,
       "learned": 0,
       "episodes": [
         1
@@ -38,13 +38,13 @@
     },
     {
       "date": "2026-08-30",
-      "count": 6,
+      "count": 12,
       "shows": {
         "Karakai Jouzu no Takagi-san": 4,
-        "Sono Bisque Doll wa Koi wo Suru": 2
+        "Sono Bisque Doll wa Koi wo Suru": 8
       }
     }
   ],
   "latestMinedAt": "2026-08-30",
-  "studyMinutes": 5355
+  "studyMinutes": 5363
 }
