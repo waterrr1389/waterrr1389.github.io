@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import stats from '../../data/mining-stats.json';
+
+const langs = [
+	{ code: 'ja', name: 'Japanese', data: stats.ja },
+	{ code: 'en', name: 'English', data: stats.en },
+].filter((l) => l.data);
+
+const totalMined = langs.reduce((n, l) => n + l.data.total, 0);
+const totalLearned = langs.reduce((n, l) => n + l.data.learned, 0);
+---
+
+<BaseLayout title="SLA" description="Second language acquisition stats">
+	<div class="container-narrow">
+		<header class="page-header">
+			<h1>Language learning</h1>
+			<ul class="stat-row">
+				<li>
+					<strong>{totalLearned}</strong> / {totalMined} learned
+				</li>
+			</ul>
+			<p>
+				Vocabulary mining stats from Anki, aggregated per language. Only
+				aggregate counts ever leave Anki.
+			</p>
+		</header>
+
+		<section>
+			<ul class="show-list">
+				{
+					langs.map((l) => {
+						const pct =
+							l.data.total > 0
+								? Math.round((l.data.learned / l.data.total) * 1000) / 10
+								: 0;
+						return (
+							<li
+								class="show-progress"
+								style={`background: linear-gradient(to right, color-mix(in srgb, var(--accent) 12%, transparent) ${pct}%, transparent ${pct}%)`}
+							>
+								<span class="show-name">
+									<a href={`/sla/${l.code}/`}>{l.name}</a>
+								</span>
+								<span class="show-meta">
+									{l.data.learned}/{l.data.total} learned ·{' '}
+									{l.data.byDay.length} active days
+								</span>
+							</li>
+						);
+					})
+				}
+			</ul>
+			<p class="stat-note">
+				Japanese also has <a href="/sla/ja/jlpt/">JLPT vocabulary coverage</a>.
+			</p>
+		</section>
+	</div>
+</BaseLayout>

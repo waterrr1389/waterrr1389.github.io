@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MiningDashboard from '../../components/MiningDashboard.astro';
+import stats from '../../data/mining-stats.json';
+
+const studyHours =
+	stats.studyMinutes != null ? (stats.studyMinutes / 60).toFixed(1) : null;
+---
+
+<BaseLayout title="Japanese Mining" description="Japanese immersion mining progress">
+	<div class="container-narrow">
+		<header class="page-header">
+			<h1>Japanese mining</h1>
+			<p>
+				{stats.ja.total} cards mined, last active {stats.ja.latestMinedAt}. See
+				also <a href="/sla/ja/jlpt/">JLPT vocabulary coverage</a>.
+			</p>
+			<p class="stat-note">
+				Review time only counts time-to-answer, so actual study time is
+				higher. A card counts as learned once reviewed. Cards without source
+				info (browser mining, or mined before source info was configured)
+				are grouped under <code>*</code>.
+			</p>
+		</header>
+
+		<MiningDashboard
+			stats={stats.ja}
+			generatedAt={stats.generatedAt}
+			studyHours={studyHours}
+		/>
+	</div>
+</BaseLayout>

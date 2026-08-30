@@ -1,84 +1,381 @@
 {
-  "generatedAt": "2026-08-30T16:58:26+00:00",
-  "total": 52,
-  "learned": 16,
-  "byShow": [
-    {
-      "show": "Karakai Jouzu no Takagi-san",
-      "count": 43,
-      "learned": 16,
-      "episodes": [
-        6,
-        7
-      ]
-    },
-    {
-      "show": "Sono Bisque Doll wa Koi wo Suru",
-      "count": 9,
-      "learned": 0,
-      "episodes": [
-        1
-      ]
-    }
-  ],
-  "byDay": [
-    {
-      "date": "2026-07-06",
-      "count": 17,
-      "shows": {
-        "Karakai Jouzu no Takagi-san": 17
+  "generatedAt": "2026-08-30T17:53:45+00:00",
+  "ja": {
+    "total": 446,
+    "learned": 396,
+    "byShow": [
+      {
+        "show": "*",
+        "count": 394,
+        "learned": 380,
+        "episodes": []
+      },
+      {
+        "show": "Karakai Jouzu no Takagi-san",
+        "count": 43,
+        "learned": 16,
+        "episodes": [
+          6,
+          7
+        ]
+      },
+      {
+        "show": "Sono Bisque Doll wa Koi wo Suru",
+        "count": 9,
+        "learned": 0,
+        "episodes": [
+          1
+        ]
       }
-    },
-    {
-      "date": "2026-08-29",
-      "count": 22,
-      "shows": {
-        "Karakai Jouzu no Takagi-san": 22
+    ],
+    "byDay": [
+      {
+        "date": "2026-04-02",
+        "count": 88,
+        "shows": {
+          "*": 88
+        }
+      },
+      {
+        "date": "2026-04-03",
+        "count": 2,
+        "shows": {
+          "*": 2
+        }
+      },
+      {
+        "date": "2026-04-04",
+        "count": 1,
+        "shows": {
+          "*": 1
+        }
+      },
+      {
+        "date": "2026-04-07",
+        "count": 1,
+        "shows": {
+          "*": 1
+        }
+      },
+      {
+        "date": "2026-04-08",
+        "count": 54,
+        "shows": {
+          "*": 54
+        }
+      },
+      {
+        "date": "2026-04-09",
+        "count": 43,
+        "shows": {
+          "*": 43
+        }
+      },
+      {
+        "date": "2026-04-13",
+        "count": 1,
+        "shows": {
+          "*": 1
+        }
+      },
+      {
+        "date": "2026-04-14",
+        "count": 1,
+        "shows": {
+          "*": 1
+        }
+      },
+      {
+        "date": "2026-04-16",
+        "count": 30,
+        "shows": {
+          "*": 30
+        }
+      },
+      {
+        "date": "2026-04-17",
+        "count": 12,
+        "shows": {
+          "*": 12
+        }
+      },
+      {
+        "date": "2026-04-23",
+        "count": 6,
+        "shows": {
+          "*": 6
+        }
+      },
+      {
+        "date": "2026-04-24",
+        "count": 49,
+        "shows": {
+          "*": 49
+        }
+      },
+      {
+        "date": "2026-04-30",
+        "count": 41,
+        "shows": {
+          "*": 41
+        }
+      },
+      {
+        "date": "2026-05-02",
+        "count": 25,
+        "shows": {
+          "*": 25
+        }
+      },
+      {
+        "date": "2026-05-08",
+        "count": 3,
+        "shows": {
+          "*": 3
+        }
+      },
+      {
+        "date": "2026-05-09",
+        "count": 11,
+        "shows": {
+          "*": 11
+        }
+      },
+      {
+        "date": "2026-05-21",
+        "count": 13,
+        "shows": {
+          "*": 13
+        }
+      },
+      {
+        "date": "2026-05-22",
+        "count": 7,
+        "shows": {
+          "*": 7
+        }
+      },
+      {
+        "date": "2026-06-05",
+        "count": 4,
+        "shows": {
+          "*": 4
+        }
+      },
+      {
+        "date": "2026-07-06",
+        "count": 19,
+        "shows": {
+          "Karakai Jouzu no Takagi-san": 17,
+          "*": 2
+        }
+      },
+      {
+        "date": "2026-08-29",
+        "count": 22,
+        "shows": {
+          "Karakai Jouzu no Takagi-san": 22
+        }
+      },
+      {
+        "date": "2026-08-30",
+        "count": 12,
+        "shows": {
+          "Karakai Jouzu no Takagi-san": 4,
+          "Sono Bisque Doll wa Koi wo Suru": 8
+        }
+      },
+      {
+        "date": "2026-08-31",
+        "count": 1,
+        "shows": {
+          "Sono Bisque Doll wa Koi wo Suru": 1
+        }
       }
-    },
-    {
-      "date": "2026-08-30",
-      "count": 12,
-      "shows": {
-        "Karakai Jouzu no Takagi-san": 4,
-        "Sono Bisque Doll wa Koi wo Suru": 8
+    ],
+    "latestMinedAt": "2026-08-31",
+    "jlptCoverage": [
+      {
+        "level": "N5",
+        "total": 803,
+        "learned": 469
+      },
+      {
+        "level": "N4",
+        "total": 756,
+        "learned": 464
+      },
+      {
+        "level": "N3",
+        "total": 1818,
+        "learned": 772
+      },
+      {
+        "level": "N2",
+        "total": 3207,
+        "learned": 458
+      },
+      {
+        "level": "N1",
+        "total": 4029,
+        "learned": 240
       }
-    },
-    {
-      "date": "2026-08-31",
-      "count": 1,
-      "shows": {
-        "Sono Bisque Doll wa Koi wo Suru": 1
+    ]
+  },
+  "en": {
+    "total": 462,
+    "learned": 297,
+    "byShow": [
+      {
+        "show": "*",
+        "count": 462,
+        "learned": 297,
+        "episodes": []
       }
-    }
-  ],
-  "latestMinedAt": "2026-08-31",
-  "studyMinutes": 5363,
-  "jlptCoverage": [
-    {
-      "level": "N5",
-      "total": 803,
-      "learned": 469
-    },
-    {
-      "level": "N4",
-      "total": 756,
-      "learned": 464
-    },
-    {
-      "level": "N3",
-      "total": 1818,
-      "learned": 772
-    },
-    {
-      "level": "N2",
-      "total": 3207,
-      "learned": 458
-    },
-    {
-      "level": "N1",
-      "total": 4029,
-      "learned": 240
-    }
-  ]
+    ],
+    "byDay": [
+      {
+        "date": "2026-03-16",
+        "count": 3,
+        "shows": {
+          "*": 3
+        }
+      },
+      {
+        "date": "2026-03-17",
+        "count": 2,
+        "shows": {
+          "*": 2
+        }
+      },
+      {
+        "date": "2026-03-22",
+        "count": 86,
+        "shows": {
+          "*": 86
+        }
+      },
+      {
+        "date": "2026-03-23",
+        "count": 22,
+        "shows": {
+          "*": 22
+        }
+      },
+      {
+        "date": "2026-03-24",
+        "count": 14,
+        "shows": {
+          "*": 14
+        }
+      },
+      {
+        "date": "2026-03-26",
+        "count": 14,
+        "shows": {
+          "*": 14
+        }
+      },
+      {
+        "date": "2026-03-28",
+        "count": 5,
+        "shows": {
+          "*": 5
+        }
+      },
+      {
+        "date": "2026-03-29",
+        "count": 77,
+        "shows": {
+          "*": 77
+        }
+      },
+      {
+        "date": "2026-03-30",
+        "count": 9,
+        "shows": {
+          "*": 9
+        }
+      },
+      {
+        "date": "2026-04-05",
+        "count": 25,
+        "shows": {
+          "*": 25
+        }
+      },
+      {
+        "date": "2026-04-06",
+        "count": 16,
+        "shows": {
+          "*": 16
+        }
+      },
+      {
+        "date": "2026-04-07",
+        "count": 18,
+        "shows": {
+          "*": 18
+        }
+      },
+      {
+        "date": "2026-04-10",
+        "count": 2,
+        "shows": {
+          "*": 2
+        }
+      },
+      {
+        "date": "2026-04-20",
+        "count": 11,
+        "shows": {
+          "*": 11
+        }
+      },
+      {
+        "date": "2026-04-21",
+        "count": 3,
+        "shows": {
+          "*": 3
+        }
+      },
+      {
+        "date": "2026-04-22",
+        "count": 22,
+        "shows": {
+          "*": 22
+        }
+      },
+      {
+        "date": "2026-04-23",
+        "count": 104,
+        "shows": {
+          "*": 104
+        }
+      },
+      {
+        "date": "2026-06-05",
+        "count": 27,
+        "shows": {
+          "*": 27
+        }
+      },
+      {
+        "date": "2026-07-12",
+        "count": 1,
+        "shows": {
+          "*": 1
+        }
+      },
+      {
+        "date": "2026-08-28",
+        "count": 1,
+        "shows": {
+          "*": 1
+        }
+      }
+    ],
+    "latestMinedAt": "2026-08-28"
+  },
+  "studyMinutes": 5363
 }

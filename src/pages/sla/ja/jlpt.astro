@@ -1,9 +1,9 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import stats from '../../data/mining-stats.json';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import stats from '../../../data/mining-stats.json';
 
 // jlptCoverage is emitted by ~/anki/sync_mining_to_blog.py; absent in older files.
-const coverage = stats.jlptCoverage ?? [];
+const coverage = stats.ja?.jlptCoverage ?? [];
 const totalWords = coverage.reduce((n, l) => n + l.total, 0);
 const totalLearned = coverage.reduce((n, l) => n + l.learned, 0);
 const overallPct = totalWords > 0 ? Math.round((totalLearned / totalWords) * 100) : 0;
@@ -20,7 +20,7 @@ const overallPct = totalWords > 0 ? Math.round((totalLearned / totalWords) * 100
 			</ul>
 			<p>
 				Unique words learned across all Japanese decks, measured against a
-				community JLPT word list. See also <a href="/mining/">mining progress</a>.
+				community JLPT word list. See also <a href="/sla/ja/">mining progress</a>.
 			</p>
 			<p class="stat-note">
 				The list is unofficial (no official JLPT vocabulary list exists), so
@@ -54,20 +54,6 @@ const overallPct = totalWords > 0 ? Math.round((totalLearned / totalWords) * 100
 </BaseLayout>
 
 <style>
-	#jlpt-app .stat-row {
-		list-style: none;
-		padding: 0;
-		display: flex;
-		gap: 2em;
-		flex-wrap: wrap;
-	}
-	#jlpt-app .stat-row strong {
-		font-size: 1.4em;
-	}
-	#jlpt-app .stat-note {
-		font-size: 13px;
-		color: var(--text-secondary);
-	}
 	#jlpt-app .level-list {
 		list-style: none;
 		padding: 0;

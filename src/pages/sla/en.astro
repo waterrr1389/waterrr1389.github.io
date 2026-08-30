@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MiningDashboard from '../../components/MiningDashboard.astro';
+import stats from '../../data/mining-stats.json';
+---
+
+<BaseLayout title="English Mining" description="English vocabulary mining progress">
+	<div class="container-narrow">
+		<header class="page-header">
+			<h1>English mining</h1>
+			<p>
+				{stats.en.total} cards mined, last active {stats.en.latestMinedAt}.
+			</p>
+			<p class="stat-note">
+				A card counts as learned once reviewed. Cards without source info
+				are grouped under <code>*</code>.
+			</p>
+		</header>
+
+		<MiningDashboard stats={stats.en} generatedAt={stats.generatedAt} />
+	</div>
+</BaseLayout>

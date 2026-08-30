@@ -7,6 +7,11 @@ import { INNER_PATH } from './src/config';
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://waterrr1389.github.io',
+	redirects: {
+		// Mining pages moved under /sla/.
+		'/mining': '/sla/ja/',
+		'/mining/jlpt': '/sla/ja/jlpt/',
+	},
 	integrations: [
 		sitemap({
 			// Keep the hidden /inner section out of the sitemap.
