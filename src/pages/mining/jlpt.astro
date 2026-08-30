@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import stats from '../../data/mining-stats.json';
+
+// jlptCoverage is emitted by ~/anki/sync_mining_to_blog.py; absent in older files.
+const coverage = stats.jlptCoverage ?? [];
+const totalWords = coverage.reduce((n, l) => n + l.total, 0);
+const totalLearned = coverage.reduce((n, l) => n + l.learned, 0);
+const overallPct = totalWords > 0 ? Math.round((totalLearned / totalWords) * 100) : 0;
+---
+
+<BaseLayout title="JLPT Coverage" description="JLPT vocabulary coverage from Anki">
+	<div class="container-narrow" id="jlpt-app">
+		<header class="page-header">
+			<h1>JLPT vocabulary coverage</h1>
+			<ul class="stat-row">
+				<li>
+					<strong>{totalLearned}</strong> / {totalWords} learned ({overallPct}%)
+				</li>
+			</ul>
+			<p>
+				Unique words learned across all Japanese decks, measured against a
+				community JLPT word list. See also <a href="/mining/">mining progress</a>.
+			</p>
+			<p class="stat-note">
+				The list is unofficial (no official JLPT vocabulary list exists), so
+				coverage is approximate. A word counts as learned once any of its
+				cards has been reviewed.
+			</p>
+		</header>
+
+		<section>
+			<h2>By level</h2>
+			<ul class="level-list">
+				{
+					coverage.map((l) => {
+						const pct = l.total > 0 ? Math.round((l.learned / l.total) * 1000) / 10 : 0;
+						return (
+							<li
+								class="level-progress"
+								style={`background: linear-gradient(to right, color-mix(in srgb, var(--accent) 12%, transparent) ${pct}%, transparent ${pct}%)`}
+							>
+								<span class="level-name">{l.level}</span>
+								<span class="level-meta">
+									{l.learned}/{l.total} learned · {pct}%
+								</span>
+							</li>
+						);
+					})
+				}
+			</ul>
+		</section>
+	</div>
+</BaseLayout>
+
+<style>
+	#jlpt-app .stat-row {
+		list-style: none;
+		padding: 0;
+		display: flex;
+		gap: 2em;
+		flex-wrap: wrap;
+	}
+	#jlpt-app .stat-row strong {
+		font-size: 1.4em;
+	}
+	#jlpt-app .stat-note {
+		font-size: 13px;
+		color: var(--text-secondary);
+	}
+	#jlpt-app .level-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
+	}
+	#jlpt-app .level-progress {
+		display: flex;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 0.45rem 0.6rem;
+		border-radius: 6px;
+	}
+	#jlpt-app .level-name {
+		font-weight: 600;
+	}
+	#jlpt-app .level-meta {
+		color: var(--text-secondary);
+		font-size: 0.9em;
+	}
+</style>

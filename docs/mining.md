@@ -49,6 +49,13 @@ AnkiConnect exposes an HTTP JSON API at `http://127.0.0.1:8765` (API v6).
   - Aggregates: total; learned; per show (count, learned, episode set); per
     day (note id is the creation time in epoch ms) with a per-day show
     breakdown; latest mining day.
+  - JLPT coverage: runs the `anki_coverage` engine in-process (read-only,
+    over AnkiConnect) with `~/anki/configs/jlpt.json`, scoped to the same
+    three note types as the `jlpt_coverage` addon (Lapis, Kaishi 1.5k zh-CH,
+    eggrolls-JLPT10k-v3.5); reduces entries to per-level
+    `{level, total, learned}` counts. The word list is derived from the
+    eggrolls deck itself, so "covered" is always 100% — only learned counts
+    are meaningful. On failure the previous JSON's `jlptCoverage` is kept.
   - Compares ignoring `generatedAt`; exits quietly when unchanged.
   - Refuses to push when the blog repo has unrelated pending changes.
     Whitelist: the stats file itself and `AGENTS.md`. The commit is scoped
@@ -80,8 +87,17 @@ AnkiConnect exposes an HTTP JSON API at `http://127.0.0.1:8765` (API v6).
 
 `mining-stats.json` shape: `{ generatedAt, total, learned, studyMinutes,
 latestMinedAt, byShow: [{show, count, learned, episodes}], byDay: [{date,
-count, shows: {show: count}}] }`. `learned`/`studyMinutes` may be absent in
-older files; the page tolerates that.
+count, shows: {show: count}}], jlptCoverage: [{level, total, learned}] }`.
+`learned`/`studyMinutes`/`jlptCoverage` may be absent in older files; the
+pages tolerate that.
+
+## 3b. Display — `src/pages/mining/jlpt.astro`
+
+- JLPT vocabulary coverage at `/mining/jlpt/`, linked from the mining page
+  header. Server-rendered only, no client JS.
+- Content: overall learned/total summary, per-level (N5–N1) progress rows
+  using the same accent-gradient idiom as the mining page's by-show list,
+  and a methodology note (unofficial word list, learned = reviewed once).
 
 ## 4. Update and deploy flow
 
