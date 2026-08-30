@@ -75,6 +75,10 @@ const dataMax = cells[cells.length - 1].date;
 
 const learnedPct =
 	stats.total > 0 ? Math.round((stats.learned / stats.total) * 100) : null;
+
+// The JSON uses "*" as the catch-all key for cards without source info;
+// render it as something humans can parse.
+const showName = (show: string) => (show === '*' ? 'No source info' : show);
 ---
 
 <ul class="stat-row">
@@ -110,7 +114,7 @@ const learnedPct =
 						class="show-progress"
 						style={`background: linear-gradient(to right, color-mix(in srgb, var(--accent) 12%, transparent) ${pct}%, transparent ${pct}%)`}
 					>
-						<span class="show-name">{s.show}</span>
+						<span class="show-name">{showName(s.show)}</span>
 						<span class="show-meta">
 							{learned}/{s.count} learned
 							{s.episodes.length > 0 &&
@@ -277,7 +281,7 @@ const learnedPct =
 					.map(([show, count]) => {
 						const li = document.createElement('li');
 						const name = document.createElement('span');
-						name.textContent = show;
+						name.textContent = show === '*' ? 'No source info' : show;
 						const meta = document.createElement('span');
 						meta.className = 'show-meta';
 						meta.textContent = `${count} cards`;

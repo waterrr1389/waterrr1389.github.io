@@ -84,7 +84,7 @@ range picker:
   for the client script). The heatmap is server-rendered, so the page works
   without JS; the range-picker results are client-only.
 - By-show list: learned/total progress gradient per show. The catch-all
-  `"*"` show (cards without source info) renders like any other row, just
+  `"*"` show (cards without source info) renders as "No source info",
   without an episode list.
 - Heatmap: GitHub-style, one column per week (Sunday-aligned), rows Sun–Sat;
   window is 52 weeks clamped to the week containing the first recorded day;
