@@ -94,8 +94,10 @@ range picker:
 - Range picker: From/To date inputs + Reset. On change the client rebuilds
   the whole heatmap (rescaled to the range, color levels recomputed from the
   range max, month labels rebuilt) and lists the range total, per-show
-  breakdown, and per-day bars. Swapped inputs are auto-corrected; empty
-  inputs fall back to the full range.
+  breakdown, and per-day bars inside a collapsed-by-default
+  "Range results" `<details>` (it duplicates the by-show list at full
+  range, so it stays folded until needed). Swapped inputs are
+  auto-corrected; empty inputs fall back to the full range.
 - Styles: shared stat styles (`.stat-row`, `.stat-note`, `.show-list`,
   `.show-meta`, `.show-progress`) live in `global.css`; heatmap/range-picker
   styles use `<style is:global>` in the component because Astro-scoped

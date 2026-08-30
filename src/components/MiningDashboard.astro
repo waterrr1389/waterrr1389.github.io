@@ -174,11 +174,14 @@ const learnedPct =
 		<button id="range-reset" type="button">Reset</button>
 	</div>
 
-	<div class="range-result" aria-live="polite">
-		<p class="range-total"><strong id="range-total" /></p>
-		<ul class="show-list" id="range-shows" />
-		<ul class="day-list" id="range-days" />
-	</div>
+	<details class="range-result">
+		<summary>Range results</summary>
+		<div aria-live="polite">
+			<p class="range-total"><strong id="range-total" /></p>
+			<ul class="show-list" id="range-shows" />
+			<ul class="day-list" id="range-days" />
+		</div>
+	</details>
 </section>
 
 <script>
@@ -452,7 +455,18 @@ const learnedPct =
 		color: var(--text);
 		border-color: var(--text-secondary);
 	}
-	#mining-app .range-total {
+	#mining-app .range-result {
 		margin-top: 1em;
+	}
+	#mining-app .range-result summary {
+		cursor: pointer;
+		color: var(--text-secondary);
+		font-size: 14px;
+	}
+	#mining-app .range-result summary:hover {
+		color: var(--text);
+	}
+	#mining-app .range-total {
+		margin-top: 0.6em;
 	}
 </style>
