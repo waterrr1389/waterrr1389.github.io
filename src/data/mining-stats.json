@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-31T06:16:07+00:00",
+  "generatedAt": "2026-08-31T07:14:27+00:00",
   "ja": {
     "total": 454,
     "learned": 396,
@@ -208,8 +208,8 @@
       },
       {
         "level": "N3",
-        "total": 1816,
-        "learned": 790
+        "total": 1814,
+        "learned": 788
       },
       {
         "level": "N2",
@@ -218,8 +218,8 @@
       },
       {
         "level": "N1",
-        "total": 4029,
-        "learned": 244
+        "total": 4043,
+        "learned": 245
       }
     ]
   },
