@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-08-31T18:20:33+00:00",
+  "generatedAt": "2026-08-31T19:37:32+00:00",
   "ja": {
     "total": 464,
-    "learned": 397,
+    "learned": 402,
     "byShow": [
       {
         "show": "*",
@@ -13,7 +13,7 @@
       {
         "show": "Karakai Jouzu no Takagi-san",
         "count": 43,
-        "learned": 16,
+        "learned": 18,
         "episodes": [
           6,
           7
@@ -22,7 +22,7 @@
       {
         "show": "Sono Bisque Doll wa Koi wo Suru",
         "count": 27,
-        "learned": 1,
+        "learned": 4,
         "episodes": [
           1,
           2
@@ -211,22 +211,22 @@
       {
         "level": "N4",
         "total": 753,
-        "learned": 474
+        "learned": 475
       },
       {
         "level": "N3",
         "total": 1814,
-        "learned": 788
+        "learned": 804
       },
       {
         "level": "N2",
         "total": 3207,
-        "learned": 472
+        "learned": 474
       },
       {
         "level": "N1",
         "total": 4043,
-        "learned": 245
+        "learned": 246
       }
     ]
   },
@@ -385,5 +385,5 @@
     ],
     "latestMinedAt": "2026-08-28"
   },
-  "studyMinutes": 5363
+  "studyMinutes": 5372
 }
