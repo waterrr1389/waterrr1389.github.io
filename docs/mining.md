@@ -8,8 +8,10 @@ Only aggregate counts ever leave Anki; no card content is published.
 
 ## 1. Collection — mpv + mpvacious + Yomitan
 
-Cards are created through two pipelines, both via AnkiConnect and both using
-the `Lapis` note model:
+Cards are created through two pipelines, both via AnkiConnect. Japanese uses
+the `Lapis` note model; English cards were migrated to a `Lapis copy` model
+(cloned from Lapis) so that note-type-scoped tooling never sweeps the
+English deck into Japanese stats:
 
 - **Video mining**: mpv + mpvacious (subs2srs, config at
   `~/.config/mpv/script-opts/subs2srs.conf`) feeds subtitle text to the
