@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-08-31T07:14:27+00:00",
+  "generatedAt": "2026-08-31T18:20:33+00:00",
   "ja": {
-    "total": 454,
-    "learned": 396,
+    "total": 464,
+    "learned": 397,
     "byShow": [
       {
         "show": "*",
@@ -21,8 +21,8 @@
       },
       {
         "show": "Sono Bisque Doll wa Koi wo Suru",
-        "count": 17,
-        "learned": 0,
+        "count": 27,
+        "learned": 1,
         "episodes": [
           1,
           2
@@ -192,9 +192,16 @@
         "shows": {
           "Sono Bisque Doll wa Koi wo Suru": 9
         }
+      },
+      {
+        "date": "2026-09-01",
+        "count": 10,
+        "shows": {
+          "Sono Bisque Doll wa Koi wo Suru": 10
+        }
       }
     ],
-    "latestMinedAt": "2026-08-31",
+    "latestMinedAt": "2026-09-01",
     "jlptCoverage": [
       {
         "level": "N5",
@@ -214,7 +221,7 @@
       {
         "level": "N2",
         "total": 3207,
-        "learned": 471
+        "learned": 472
       },
       {
         "level": "N1",
