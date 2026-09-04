@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-08-31T19:37:32+00:00",
+  "generatedAt": "2026-09-04T09:27:58+00:00",
   "ja": {
-    "total": 464,
-    "learned": 402,
+    "total": 492,
+    "learned": 411,
     "byShow": [
       {
         "show": "*",
@@ -11,21 +11,23 @@
         "episodes": []
       },
       {
-        "show": "Karakai Jouzu no Takagi-san",
-        "count": 43,
-        "learned": 18,
+        "show": "Sono Bisque Doll wa Koi wo Suru",
+        "count": 55,
+        "learned": 9,
         "episodes": [
-          6,
-          7
+          1,
+          2,
+          3,
+          4
         ]
       },
       {
-        "show": "Sono Bisque Doll wa Koi wo Suru",
-        "count": 27,
-        "learned": 4,
+        "show": "Karakai Jouzu no Takagi-san",
+        "count": 43,
+        "learned": 22,
         "episodes": [
-          1,
-          2
+          6,
+          7
         ]
       }
     ],
@@ -199,34 +201,55 @@
         "shows": {
           "Sono Bisque Doll wa Koi wo Suru": 10
         }
+      },
+      {
+        "date": "2026-09-02",
+        "count": 18,
+        "shows": {
+          "Sono Bisque Doll wa Koi wo Suru": 18
+        }
+      },
+      {
+        "date": "2026-09-03",
+        "count": 9,
+        "shows": {
+          "Sono Bisque Doll wa Koi wo Suru": 9
+        }
+      },
+      {
+        "date": "2026-09-04",
+        "count": 1,
+        "shows": {
+          "Sono Bisque Doll wa Koi wo Suru": 1
+        }
       }
     ],
-    "latestMinedAt": "2026-09-01",
+    "latestMinedAt": "2026-09-04",
     "jlptCoverage": [
       {
         "level": "N5",
         "total": 796,
-        "learned": 477
+        "learned": 479
       },
       {
         "level": "N4",
         "total": 753,
-        "learned": 475
+        "learned": 476
       },
       {
         "level": "N3",
         "total": 1814,
-        "learned": 804
+        "learned": 829
       },
       {
         "level": "N2",
         "total": 3207,
-        "learned": 474
+        "learned": 478
       },
       {
         "level": "N1",
         "total": 4043,
-        "learned": 246
+        "learned": 249
       }
     ]
   },
@@ -385,5 +408,5 @@
     ],
     "latestMinedAt": "2026-08-28"
   },
-  "studyMinutes": 5372
+  "studyMinutes": 5425
 }
