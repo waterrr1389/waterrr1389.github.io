@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-04T09:27:58+00:00",
+  "generatedAt": "2026-09-06T09:52:54+00:00",
   "ja": {
-    "total": 492,
+    "total": 500,
     "learned": 411,
     "byShow": [
       {
@@ -12,7 +12,7 @@
       },
       {
         "show": "Sono Bisque Doll wa Koi wo Suru",
-        "count": 55,
+        "count": 61,
         "learned": 9,
         "episodes": [
           1,
@@ -28,6 +28,14 @@
         "episodes": [
           6,
           7
+        ]
+      },
+      {
+        "show": "K-On!",
+        "count": 2,
+        "learned": 0,
+        "episodes": [
+          1
         ]
       }
     ],
@@ -218,13 +226,21 @@
       },
       {
         "date": "2026-09-04",
-        "count": 1,
+        "count": 2,
         "shows": {
-          "Sono Bisque Doll wa Koi wo Suru": 1
+          "Sono Bisque Doll wa Koi wo Suru": 2
+        }
+      },
+      {
+        "date": "2026-09-06",
+        "count": 7,
+        "shows": {
+          "Sono Bisque Doll wa Koi wo Suru": 5,
+          "K-On!": 2
         }
       }
     ],
-    "latestMinedAt": "2026-09-04",
+    "latestMinedAt": "2026-09-06",
     "jlptCoverage": [
       {
         "level": "N5",
@@ -239,7 +255,7 @@
       {
         "level": "N3",
         "total": 1814,
-        "learned": 829
+        "learned": 830
       },
       {
         "level": "N2",
