@@ -118,10 +118,12 @@ is carried over from the previous JSON by the script rather than dropped.
 ## 4. Update and deploy flow
 
 1. Mine cards locally while watching or reading.
-2. Run `sync_mining_to_blog.py` manually (cron is only suggested, not
-   installed — see Known issues).
+2. Run `push_mining.sh` (wrapper at `~/anki/`, aliased as `push_mining` in
+   zsh): it pings AnkiConnect, launches Anki and waits for the API if Anki is
+   closed, then runs `sync_mining_to_blog.py`. Running
+   `sync_mining_to_blog.py` directly still works when Anki is already up.
 3. If the stats changed, the script commits `src/data/mining-stats.json`
-   ("Update mining stats") and pushes.
+   (`Update mining stats (ja: N, en: M) — <date>`) and pushes.
 4. `.github/workflows/deploy.yml` rebuilds the site on push; `/sla/`
    updates with the deploy.
 
