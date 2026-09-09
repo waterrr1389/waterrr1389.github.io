@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-07T12:39:46+00:00",
+  "generatedAt": "2026-09-09T06:36:08+00:00",
   "ja": {
-    "total": 512,
+    "total": 521,
     "learned": 438,
     "byShow": [
       {
@@ -31,16 +31,16 @@
         ]
       },
       {
-        "show": "K-On!",
-        "count": 11,
+        "show": "Love Live! S1",
+        "count": 12,
         "learned": 0,
         "episodes": [
           1
         ]
       },
       {
-        "show": "Love Live! S1",
-        "count": 3,
+        "show": "K-On!",
+        "count": 11,
         "learned": 0,
         "episodes": [
           1
@@ -249,10 +249,10 @@
       },
       {
         "date": "2026-09-07",
-        "count": 4,
+        "count": 13,
         "shows": {
           "K-On!": 1,
-          "Love Live! S1": 3
+          "Love Live! S1": 12
         }
       }
     ],
@@ -276,12 +276,12 @@
       {
         "level": "N2",
         "total": 3207,
-        "learned": 490
+        "learned": 491
       },
       {
         "level": "N1",
         "total": 4043,
-        "learned": 257
+        "learned": 258
       }
     ]
   },
@@ -440,5 +440,5 @@
     ],
     "latestMinedAt": "2026-08-28"
   },
-  "studyMinutes": 5538
+  "studyMinutes": 5590
 }
