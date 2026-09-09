@@ -57,11 +57,15 @@ AnkiConnect exposes an HTTP JSON API at `http://127.0.0.1:8765` (API v6).
     eggrolls-JLPT10k-v3.5); reduces entries to per-level
     `{level, total, learned}` counts. The word list is derived from the
     eggrolls deck itself, so "covered" is always 100% — only learned counts
-    are meaningful. On failure the previous JSON's coverage is kept.
+    are meaningful. On failure the whole run aborts (exit 1, nothing
+    committed or pushed): stale coverage must never be pushed silently.
   - Aggregates per language: total; learned; per show (count, learned,
     episode set); per day (note id is the creation time in epoch ms) with a
     per-day show breakdown; latest mining day.
-  - Compares ignoring `generatedAt`; exits quietly when unchanged.
+  - Compares ignoring `generatedAt`; exits quietly when unchanged. If the
+    only unpushed commits are stats updates (e.g. an earlier push failed
+    after committing), it retries the push instead of leaving `/sla/`
+    silently stale.
   - Refuses to push when the blog repo has unrelated pending changes.
     Whitelist: the stats file itself and `AGENTS.md`. The commit is scoped
     with `git commit -- <path>` so staged whitelisted edits are not swept in.
