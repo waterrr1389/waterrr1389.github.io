@@ -138,9 +138,12 @@ is carried over from the previous JSON by the script rather than dropped.
    `~/anki/logs/anki-start.log`) and wait up to `PUSH_MINING_WAIT_SECONDS`
    (default 90) for the API, then runs `sync_mining_to_blog.py`. Running
    `sync_mining_to_blog.py` directly still works when Anki is already up.
-3. If the stats changed, the script commits `src/data/mining-stats.json`
-   (`Update mining stats (ja: N, en: M) — <date>`) and pushes.
-4. `.github/workflows/deploy.yml` rebuilds the site on push; `/sla/`
+3. The run prints the totals and a JLPT line (per-level learned plus the
+   change since the last push), so no separate report command is needed.
+4. If the stats changed, the script commits `src/data/mining-stats.json`
+   (`Update mining stats (ja: N, en: M) — <date>`) and pushes, then prints
+   the `/sla/ja/jlpt/` URL and the Actions URL to check the deploy.
+5. `.github/workflows/deploy.yml` rebuilds the site on push; `/sla/`
    updates with the deploy.
 
 ## Known issues
