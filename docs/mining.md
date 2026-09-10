@@ -37,7 +37,9 @@ AnkiConnect exposes an HTTP JSON API at `http://127.0.0.1:8765` (API v6).
   maintenance, not part of the blog pipeline.
 - `~/anki/sync_mining_to_blog.py` (standalone, calls the API via urllib):
   - Starts with an AnkiWeb `sync` so phone-side reviews reach the local
-    collection before stats are read.
+    collection before stats are read. It uses a 180s request timeout instead
+    of the 10s default: a full sync that times out would silently drop
+    phone-side reviews from every subsequent number.
   - Per language (`LANGUAGES`): every note in the mining deck counts toward
     total/learned/byDay. Notes whose `MiscInfo` matches
     `MISC_RE = ^(?P<show>.+?)\s+EP(?P<ep>\d+)\s+\(` additionally group into
@@ -66,10 +68,16 @@ AnkiConnect exposes an HTTP JSON API at `http://127.0.0.1:8765` (API v6).
     only unpushed commits are stats updates (e.g. an earlier push failed
     after committing), it retries the push instead of leaving `/sla/`
     silently stale.
-  - Refuses to push when the blog repo has unrelated pending changes.
-    Whitelist: the stats file itself and `AGENTS.md`. The commit is scoped
-    with `git commit -- <path>` so staged whitelisted edits are not swept in.
-  - Suggested crontab entry (NOT installed — `crontab -l` is empty):
+  - Refuses to push while the blog repo has local commits that are not on
+    `origin/main` yet, unless every one of them is a stats update. `git push`
+    publishes the whole branch, so this is what keeps drafts from being
+    published as a side effect. Uncommitted working-tree changes do not
+    block: the commit is scoped with `git commit -- <stats path>` and never
+    sweeps them in.
+  - Suggested crontab entry (NOT installed — `crontab -l` is empty). The log
+    directory is created by `push_mining.sh`, not by `sync_mining_to_blog.py`,
+    so create it once before relying on this redirect:
+    `mkdir -p ~/anki/logs` and
     `17 */6 * * * cd /home/frisk/anki && /usr/bin/python3 sync_mining_to_blog.py >> /home/frisk/anki/logs/mining-sync.log 2>&1`
 
 ## 3. Display — `src/pages/sla/`
@@ -123,8 +131,12 @@ is carried over from the previous JSON by the script rather than dropped.
 
 1. Mine cards locally while watching or reading.
 2. Run `push_mining.sh` (wrapper at `~/anki/`, aliased as `push_mining` in
-   zsh): it pings AnkiConnect, launches Anki and waits for the API if Anki is
-   closed, then runs `sync_mining_to_blog.py`. Running
+   zsh): it takes a lock so concurrent runs cannot race on the git index,
+   pings AnkiConnect, and — if the API does not answer but an Anki process is
+   already running — waits for it rather than launching a duplicate instance.
+   Only when no Anki process exists does it start Anki (logging to
+   `~/anki/logs/anki-start.log`) and wait up to `PUSH_MINING_WAIT_SECONDS`
+   (default 90) for the API, then runs `sync_mining_to_blog.py`. Running
    `sync_mining_to_blog.py` directly still works when Anki is already up.
 3. If the stats changed, the script commits `src/data/mining-stats.json`
    (`Update mining stats (ja: N, en: M) — <date>`) and pushes.
@@ -137,6 +149,6 @@ is carried over from the previous JSON by the script rather than dropped.
 - **`MISC_RE` ↔ `miscinfo_format` coupling**: changing one requires
   changing the other.
 - **`*` dominates**: most existing cards predate MiscInfo configuration, so
-  the `"*"` catch-all dwarfs the named shows (JA 394/446, EN 462/462). This
-  improves only as new properly-tagged cards are mined; old cards are not
-  backfilled.
+  the `"*"` catch-all dwarfs the named shows (as of 2026-09: JA 394 of 521
+  cards, EN 462 of 462). This improves only as new properly-tagged cards are
+  mined; old cards are not backfilled.
