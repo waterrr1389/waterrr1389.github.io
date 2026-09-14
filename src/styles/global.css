@@ -242,11 +242,13 @@ pre {
 }
 
 .site-nav.nav-open .nav-line-top {
-	transform: translateY(2.5px) rotate(45deg);
+	/* Rotate first, then shift along the rotated axis so both bars meet at
+	   the 8px/8px origin and form a symmetric X. */
+	transform: rotate(45deg) translateY(2.5px);
 }
 
 .site-nav.nav-open .nav-line-bottom {
-	transform: translateY(-2.5px) rotate(-45deg);
+	transform: rotate(-45deg) translateY(-2.5px);
 }
 
 /* ===== Layout ===== */
