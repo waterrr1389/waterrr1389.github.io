@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-12T15:49:14+00:00",
+  "generatedAt": "2026-09-14T08:24:30+00:00",
   "ja": {
-    "total": 521,
+    "total": 529,
     "learned": 462,
     "byShow": [
       {
@@ -32,10 +32,12 @@
       },
       {
         "show": "Love Live! S1",
-        "count": 12,
+        "count": 20,
         "learned": 3,
         "episodes": [
-          1
+          1,
+          2,
+          3
         ]
       },
       {
@@ -254,9 +256,23 @@
           "K-On!": 1,
           "Love Live! S1": 12
         }
+      },
+      {
+        "date": "2026-09-13",
+        "count": 6,
+        "shows": {
+          "Love Live! S1": 6
+        }
+      },
+      {
+        "date": "2026-09-14",
+        "count": 2,
+        "shows": {
+          "Love Live! S1": 2
+        }
       }
     ],
-    "latestMinedAt": "2026-09-07",
+    "latestMinedAt": "2026-09-14",
     "jlptCoverage": [
       {
         "level": "N5",
@@ -440,5 +456,5 @@
     ],
     "latestMinedAt": "2026-08-28"
   },
-  "studyMinutes": 5734
+  "studyMinutes": 5749
 }
