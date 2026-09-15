@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-15T08:14:23+00:00",
+  "generatedAt": "2026-09-15T14:28:47+00:00",
   "ja": {
-    "total": 536,
-    "learned": 468,
+    "total": 542,
+    "learned": 477,
     "byShow": [
       {
         "show": "*",
@@ -13,7 +13,7 @@
       {
         "show": "Sono Bisque Doll wa Koi wo Suru",
         "count": 61,
-        "learned": 45,
+        "learned": 47,
         "episodes": [
           1,
           2,
@@ -24,7 +24,7 @@
       {
         "show": "Karakai Jouzu no Takagi-san",
         "count": 43,
-        "learned": 33,
+        "learned": 34,
         "episodes": [
           6,
           7
@@ -32,8 +32,8 @@
       },
       {
         "show": "Love Live! S1",
-        "count": 27,
-        "learned": 5,
+        "count": 33,
+        "learned": 9,
         "episodes": [
           1,
           2,
@@ -44,7 +44,7 @@
       {
         "show": "K-On!",
         "count": 11,
-        "learned": 4,
+        "learned": 6,
         "episodes": [
           1
         ]
@@ -274,9 +274,9 @@
       },
       {
         "date": "2026-09-15",
-        "count": 7,
+        "count": 13,
         "shows": {
-          "Love Live! S1": 7
+          "Love Live! S1": 13
         }
       }
     ],
@@ -290,22 +290,22 @@
       {
         "level": "N4",
         "total": 753,
-        "learned": 483
+        "learned": 484
       },
       {
         "level": "N3",
         "total": 1814,
-        "learned": 1017
+        "learned": 1019
       },
       {
         "level": "N2",
         "total": 3207,
-        "learned": 508
+        "learned": 511
       },
       {
         "level": "N1",
         "total": 4043,
-        "learned": 274
+        "learned": 277
       }
     ]
   },
@@ -464,5 +464,5 @@
     ],
     "latestMinedAt": "2026-08-28"
   },
-  "studyMinutes": 5807
+  "studyMinutes": 5849
 }
