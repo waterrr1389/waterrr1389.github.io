@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-15T14:28:47+00:00",
+  "generatedAt": "2026-09-16T17:38:52+00:00",
   "ja": {
-    "total": 542,
+    "total": 551,
     "learned": 477,
     "byShow": [
       {
@@ -45,6 +45,14 @@
         "show": "K-On!",
         "count": 11,
         "learned": 6,
+        "episodes": [
+          1
+        ]
+      },
+      {
+        "show": "Oniichan ha Oshimai!",
+        "count": 9,
+        "learned": 0,
         "episodes": [
           1
         ]
@@ -274,13 +282,21 @@
       },
       {
         "date": "2026-09-15",
-        "count": 13,
+        "count": 21,
         "shows": {
-          "Love Live! S1": 13
+          "Love Live! S1": 13,
+          "Oniichan ha Oshimai!": 8
+        }
+      },
+      {
+        "date": "2026-09-16",
+        "count": 1,
+        "shows": {
+          "Oniichan ha Oshimai!": 1
         }
       }
     ],
-    "latestMinedAt": "2026-09-15",
+    "latestMinedAt": "2026-09-16",
     "jlptCoverage": [
       {
         "level": "N5",
@@ -290,22 +306,22 @@
       {
         "level": "N4",
         "total": 753,
-        "learned": 484
+        "learned": 485
       },
       {
         "level": "N3",
         "total": 1814,
-        "learned": 1019
+        "learned": 1039
       },
       {
         "level": "N2",
         "total": 3207,
-        "learned": 511
+        "learned": 513
       },
       {
         "level": "N1",
         "total": 4043,
-        "learned": 277
+        "learned": 279
       }
     ]
   },
@@ -464,5 +480,5 @@
     ],
     "latestMinedAt": "2026-08-28"
   },
-  "studyMinutes": 5849
+  "studyMinutes": 5871
 }
