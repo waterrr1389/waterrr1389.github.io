@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-09-17T05:32:56+00:00",
+  "generatedAt": "2026-09-17T17:34:25+00:00",
   "ja": {
-    "total": 551,
+    "total": 560,
     "learned": 477,
     "byShow": [
       {
         "show": "*",
-        "count": 394,
+        "count": 395,
         "learned": 381,
         "episodes": []
       },
@@ -42,17 +42,17 @@
         ]
       },
       {
-        "show": "K-On!",
-        "count": 11,
-        "learned": 6,
+        "show": "Oniichan ha Oshimai!",
+        "count": 17,
+        "learned": 0,
         "episodes": [
           1
         ]
       },
       {
-        "show": "Oniichan ha Oshimai!",
-        "count": 9,
-        "learned": 0,
+        "show": "K-On!",
+        "count": 11,
+        "learned": 6,
         "episodes": [
           1
         ]
@@ -294,9 +294,17 @@
         "shows": {
           "Oniichan ha Oshimai!": 1
         }
+      },
+      {
+        "date": "2026-09-17",
+        "count": 9,
+        "shows": {
+          "Oniichan ha Oshimai!": 8,
+          "*": 1
+        }
       }
     ],
-    "latestMinedAt": "2026-09-16",
+    "latestMinedAt": "2026-09-17",
     "jlptCoverage": [
       {
         "level": "N5",
