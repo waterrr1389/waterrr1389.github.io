@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-17T17:34:25+00:00",
+  "generatedAt": "2026-09-19T16:27:32+00:00",
   "ja": {
     "total": 560,
     "learned": 477,
@@ -319,17 +319,17 @@
       {
         "level": "N3",
         "total": 1814,
-        "learned": 1061
+        "learned": 1088
       },
       {
         "level": "N2",
         "total": 3207,
-        "learned": 514
+        "learned": 515
       },
       {
         "level": "N1",
         "total": 4043,
-        "learned": 280
+        "learned": 281
       }
     ]
   },
@@ -488,5 +488,5 @@
     ],
     "latestMinedAt": "2026-08-28"
   },
-  "studyMinutes": 5925
+  "studyMinutes": 6009
 }
