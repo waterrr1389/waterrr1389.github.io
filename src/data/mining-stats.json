@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-20T12:47:20+00:00",
+  "generatedAt": "2026-09-21T16:33:40+00:00",
   "ja": {
     "total": 560,
-    "learned": 479,
+    "learned": 483,
     "byShow": [
       {
         "show": "*",
@@ -24,7 +24,7 @@
       {
         "show": "Karakai Jouzu no Takagi-san",
         "count": 43,
-        "learned": 35,
+        "learned": 36,
         "episodes": [
           6,
           7
@@ -33,7 +33,7 @@
       {
         "show": "Love Live! S1",
         "count": 33,
-        "learned": 10,
+        "learned": 12,
         "episodes": [
           1,
           2,
@@ -44,7 +44,7 @@
       {
         "show": "Oniichan ha Oshimai!",
         "count": 17,
-        "learned": 0,
+        "learned": 1,
         "episodes": [
           1
         ]
@@ -319,17 +319,17 @@
       {
         "level": "N3",
         "total": 1814,
-        "learned": 1107
+        "learned": 1130
       },
       {
         "level": "N2",
         "total": 3207,
-        "learned": 516
+        "learned": 517
       },
       {
         "level": "N1",
         "total": 4043,
-        "learned": 284
+        "learned": 285
       }
     ]
   },
@@ -488,5 +488,5 @@
     ],
     "latestMinedAt": "2026-08-28"
   },
-  "studyMinutes": 6037
+  "studyMinutes": 6074
 }
