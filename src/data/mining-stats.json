@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-22T12:03:31+00:00",
+  "generatedAt": "2026-09-24T16:24:29+00:00",
   "ja": {
-    "total": 560,
+    "total": 565,
     "learned": 483,
     "byShow": [
       {
@@ -43,10 +43,11 @@
       },
       {
         "show": "Oniichan ha Oshimai!",
-        "count": 17,
+        "count": 22,
         "learned": 1,
         "episodes": [
-          1
+          1,
+          2
         ]
       },
       {
@@ -302,9 +303,16 @@
           "Oniichan ha Oshimai!": 8,
           "*": 1
         }
+      },
+      {
+        "date": "2026-09-24",
+        "count": 5,
+        "shows": {
+          "Oniichan ha Oshimai!": 5
+        }
       }
     ],
-    "latestMinedAt": "2026-09-17",
+    "latestMinedAt": "2026-09-24",
     "jlptCoverage": [
       {
         "level": "N5",
@@ -314,22 +322,22 @@
       {
         "level": "N4",
         "total": 753,
-        "learned": 485
+        "learned": 486
       },
       {
         "level": "N3",
         "total": 1814,
-        "learned": 1154
+        "learned": 1182
       },
       {
         "level": "N2",
         "total": 3207,
-        "learned": 517
+        "learned": 518
       },
       {
         "level": "N1",
         "total": 4043,
-        "learned": 287
+        "learned": 288
       }
     ]
   },
@@ -488,5 +496,5 @@
     ],
     "latestMinedAt": "2026-08-28"
   },
-  "studyMinutes": 6108
+  "studyMinutes": 6234
 }
