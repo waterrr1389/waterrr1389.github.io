@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-09-27T19:05:33+00:00",
+  "generatedAt": "2026-10-22T14:05:01+00:00",
   "ja": {
-    "total": 593,
+    "total": 622,
     "learned": 483,
     "byShow": [
       {
         "show": "*",
-        "count": 415,
+        "count": 440,
         "learned": 381,
         "episodes": []
       },
@@ -60,10 +60,11 @@
       },
       {
         "show": "BOCCHI THE ROCK!",
-        "count": 4,
+        "count": 8,
         "learned": 0,
         "episodes": [
-          3
+          3,
+          6
         ]
       }
     ],
@@ -334,9 +335,23 @@
         "shows": {
           "*": 14
         }
+      },
+      {
+        "date": "2026-10-20",
+        "count": 4,
+        "shows": {
+          "BOCCHI THE ROCK!": 4
+        }
+      },
+      {
+        "date": "2026-10-22",
+        "count": 25,
+        "shows": {
+          "*": 25
+        }
       }
     ],
-    "latestMinedAt": "2026-09-27",
+    "latestMinedAt": "2026-10-22",
     "jlptCoverage": [
       {
         "level": "N5",
@@ -520,5 +535,5 @@
     ],
     "latestMinedAt": "2026-08-28"
   },
-  "studyMinutes": 6243
+  "studyMinutes": 6304
 }
