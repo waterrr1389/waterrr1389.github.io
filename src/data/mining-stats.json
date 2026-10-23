@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-10-22T14:05:01+00:00",
+  "generatedAt": "2026-10-23T09:53:05+00:00",
   "ja": {
-    "total": 622,
+    "total": 646,
     "learned": 483,
     "byShow": [
       {
@@ -42,6 +42,18 @@
         ]
       },
       {
+        "show": "BOCCHI THE ROCK!",
+        "count": 32,
+        "learned": 0,
+        "episodes": [
+          3,
+          6,
+          8,
+          9,
+          10
+        ]
+      },
+      {
         "show": "Oniichan ha Oshimai!",
         "count": 26,
         "learned": 1,
@@ -56,15 +68,6 @@
         "learned": 6,
         "episodes": [
           1
-        ]
-      },
-      {
-        "show": "BOCCHI THE ROCK!",
-        "count": 8,
-        "learned": 0,
-        "episodes": [
-          3,
-          6
         ]
       }
     ],
@@ -345,13 +348,21 @@
       },
       {
         "date": "2026-10-22",
-        "count": 25,
+        "count": 29,
         "shows": {
-          "*": 25
+          "*": 25,
+          "BOCCHI THE ROCK!": 4
+        }
+      },
+      {
+        "date": "2026-10-23",
+        "count": 20,
+        "shows": {
+          "BOCCHI THE ROCK!": 20
         }
       }
     ],
-    "latestMinedAt": "2026-10-22",
+    "latestMinedAt": "2026-10-23",
     "jlptCoverage": [
       {
         "level": "N5",
