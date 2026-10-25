@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-10-23T09:53:05+00:00",
+  "generatedAt": "2026-10-25T08:37:05+00:00",
   "ja": {
-    "total": 646,
+    "total": 661,
     "learned": 483,
     "byShow": [
       {
@@ -22,6 +22,20 @@
         ]
       },
       {
+        "show": "BOCCHI THE ROCK!",
+        "count": 47,
+        "learned": 0,
+        "episodes": [
+          3,
+          6,
+          8,
+          9,
+          10,
+          11,
+          12
+        ]
+      },
+      {
         "show": "Karakai Jouzu no Takagi-san",
         "count": 43,
         "learned": 36,
@@ -39,18 +53,6 @@
           2,
           3,
           4
-        ]
-      },
-      {
-        "show": "BOCCHI THE ROCK!",
-        "count": 32,
-        "learned": 0,
-        "episodes": [
-          3,
-          6,
-          8,
-          9,
-          10
         ]
       },
       {
@@ -356,13 +358,20 @@
       },
       {
         "date": "2026-10-23",
-        "count": 20,
+        "count": 21,
         "shows": {
-          "BOCCHI THE ROCK!": 20
+          "BOCCHI THE ROCK!": 21
+        }
+      },
+      {
+        "date": "2026-10-25",
+        "count": 14,
+        "shows": {
+          "BOCCHI THE ROCK!": 14
         }
       }
     ],
-    "latestMinedAt": "2026-10-23",
+    "latestMinedAt": "2026-10-25",
     "jlptCoverage": [
       {
         "level": "N5",
