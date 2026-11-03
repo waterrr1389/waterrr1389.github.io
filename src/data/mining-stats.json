@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-10-25T08:37:05+00:00",
+  "generatedAt": "2026-11-03T11:51:55+00:00",
   "ja": {
-    "total": 661,
-    "learned": 483,
+    "total": 668,
+    "learned": 482,
     "byShow": [
       {
         "show": "*",
-        "count": 440,
-        "learned": 381,
+        "count": 439,
+        "learned": 380,
         "episodes": []
       },
       {
@@ -22,6 +22,16 @@
         ]
       },
       {
+        "show": "Karakai Jouzu no Takagi-san",
+        "count": 51,
+        "learned": 36,
+        "episodes": [
+          6,
+          7,
+          8
+        ]
+      },
+      {
         "show": "BOCCHI THE ROCK!",
         "count": 47,
         "learned": 0,
@@ -33,15 +43,6 @@
           10,
           11,
           12
-        ]
-      },
-      {
-        "show": "Karakai Jouzu no Takagi-san",
-        "count": 43,
-        "learned": 36,
-        "episodes": [
-          6,
-          7
         ]
       },
       {
@@ -104,9 +105,9 @@
       },
       {
         "date": "2026-04-08",
-        "count": 54,
+        "count": 53,
         "shows": {
-          "*": 54
+          "*": 53
         }
       },
       {
@@ -369,9 +370,23 @@
         "shows": {
           "BOCCHI THE ROCK!": 14
         }
+      },
+      {
+        "date": "2026-10-26",
+        "count": 5,
+        "shows": {
+          "Karakai Jouzu no Takagi-san": 5
+        }
+      },
+      {
+        "date": "2026-10-27",
+        "count": 3,
+        "shows": {
+          "Karakai Jouzu no Takagi-san": 3
+        }
       }
     ],
-    "latestMinedAt": "2026-10-25",
+    "latestMinedAt": "2026-10-27",
     "jlptCoverage": [
       {
         "level": "N5",
@@ -381,12 +396,12 @@
       {
         "level": "N4",
         "total": 753,
-        "learned": 486
+        "learned": 487
       },
       {
         "level": "N3",
         "total": 1814,
-        "learned": 1195
+        "learned": 1209
       },
       {
         "level": "N2",
@@ -396,7 +411,7 @@
       {
         "level": "N1",
         "total": 4043,
-        "learned": 288
+        "learned": 289
       }
     ]
   },
@@ -555,5 +570,5 @@
     ],
     "latestMinedAt": "2026-08-28"
   },
-  "studyMinutes": 6304
+  "studyMinutes": 6462
 }
